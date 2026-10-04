@@ -30,7 +30,11 @@ class ArtifactTests(unittest.TestCase):
             selected=source[source.selection==p['purpose']];self.assertEqual(len(selected),1)
             self.assertEqual(p['threshold'],float(selected.iloc[0].threshold));self.assertEqual(self.comparison.loc[name].threshold,p['threshold'])
     def test_cached_validation_reproduction(self):
-        scores=np.load(ROOT/self.integrity['validation_probability_source'])['probability']
+        cache=ROOT/self.integrity['validation_probability_source']
+        validation=ROOT/'data/processed/validation.csv'
+        if not cache.exists() or not validation.exists():
+            self.skipTest('Optional local audit requires excluded respondent validation data and prediction cache; not distributed on GitHub.')
+        scores=np.load(cache)['probability']
         y=pd.read_csv(ROOT/'data/processed/validation.csv',usecols=['heart_disease']).heart_disease.to_numpy()
         self.assertEqual(len(scores),65109)
         for name,p in self.policy['profiles'].items():

@@ -54,4 +54,6 @@ node tests/frontend/test_app.cjs
 
 These tests compare all frontend dropdown codes against the live API schema and exercise form submission, raw responses, presets, missing values, policy switching, comparison, recording and asynchronous errors. They use a DOM adapter; actual Chrome verification is documented separately in reports/model_qa/manual_browser_verification.md.
 
+After cloning, one optional cached-validation audit test is skipped because respondent data and prediction caches are deliberately excluded. Runtime/golden/API tests do not require those files. In the original local workspace, that audit was run and passed too.
+
 Synthetic behavior observations are saved under reports/model_qa/. REVIEW means a qualitative observation needs human assessment, not a failed HTTP contract. The QA script never reads respondent datasets, fits, tunes, recalibrates or replaces the frozen model. Preserve manually entered records: the script creates its empty template only if it does not already exist.
