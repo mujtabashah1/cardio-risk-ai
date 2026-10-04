@@ -1,0 +1,4 @@
+# Supporting source files are hash-pinned by the frozen inference loader.
+# Keep exact bytes across Windows/Linux checkouts; do not normalize line endings.
+* -text
+*.txt whitespace=-blank-at-eol,-blank-at-eof,cr-at-eol
