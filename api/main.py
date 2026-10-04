@@ -44,7 +44,7 @@ def create_app(settings=None,service_factory=InferenceService):
     @app.exception_handler(InferenceError)
     async def inference_error(request,exc):return error_response(500,'INFERENCE_ERROR','Model inference failed.')
     for router in [health.router,model_info.router,predict.router]:app.include_router(router)
-    frontend=Path(__file__).resolve().parents[1]/'frontend'
+    frontend=Path(__file__).resolve().parents[1]/'frontend'/'legacy'
     if frontend.is_dir():app.mount('/testing',StaticFiles(directory=frontend,html=True),name='testing')
     return app
 app=create_app()

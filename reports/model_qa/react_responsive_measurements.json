@@ -1,0 +1,126 @@
+[
+  {
+    "width": 375,
+    "page": "QA expanded form/result/comparison",
+    "controlsOutside": [],
+    "overflow": false,
+    "scrollWidth": 360,
+    "viewport": 375
+  },
+  {
+    "width": 768,
+    "page": "QA expanded form/result/comparison",
+    "controlsOutside": [],
+    "overflow": false,
+    "scrollWidth": 753,
+    "viewport": 768
+  },
+  {
+    "width": 1024,
+    "page": "QA expanded form/result/comparison",
+    "controlsOutside": [],
+    "overflow": false,
+    "scrollWidth": 1009,
+    "viewport": 1024
+  },
+  {
+    "width": 1440,
+    "page": "QA expanded form/result/comparison",
+    "controlsOutside": [],
+    "overflow": false,
+    "scrollWidth": 1425,
+    "viewport": 1440
+  },
+  {
+    "width": 375,
+    "page": "Home",
+    "overflow": false,
+    "scrollWidth": 360,
+    "viewport": 375
+  },
+  {
+    "width": 768,
+    "page": "Home",
+    "overflow": false,
+    "scrollWidth": 753,
+    "viewport": 768
+  },
+  {
+    "width": 1024,
+    "page": "Home",
+    "overflow": false,
+    "scrollWidth": 1009,
+    "viewport": 1024
+  },
+  {
+    "width": 1440,
+    "page": "Home",
+    "overflow": false,
+    "scrollWidth": 1425,
+    "viewport": 1440
+  },
+  {
+    "width": 375,
+    "page": "Assessment",
+    "controlsOutside": [],
+    "overflow": false
+  },
+  {
+    "width": 768,
+    "page": "Assessment",
+    "controlsOutside": [],
+    "overflow": false
+  },
+  {
+    "width": 1024,
+    "page": "Assessment",
+    "controlsOutside": [],
+    "overflow": false
+  },
+  {
+    "width": 1440,
+    "page": "Assessment",
+    "controlsOutside": [],
+    "overflow": false
+  },
+  {
+    "width": 375,
+    "page": "Review",
+    "overflow": false
+  },
+  {
+    "width": 768,
+    "page": "Review",
+    "overflow": false
+  },
+  {
+    "width": 1024,
+    "page": "Review",
+    "overflow": false
+  },
+  {
+    "width": 1440,
+    "page": "Review",
+    "overflow": false
+  },
+  {
+    "width": 375,
+    "page": "Results",
+    "overflow": false
+  },
+  {
+    "width": 768,
+    "page": "Results",
+    "overflow": false
+  },
+  {
+    "width": 1024,
+    "page": "Results",
+    "overflow": false
+  },
+  {
+    "width": 1440,
+    "page": "Results",
+    "overflow": false
+  }
+]

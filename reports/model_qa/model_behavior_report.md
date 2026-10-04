@@ -33,3 +33,9 @@ Largest observed one-field response changes:
 - age_group=11: absolute difference 0.011167
 
 No unsupported clinical directional expectations were asserted. See CSV files for every input and actual response.
+
+## React integration review
+
+The React UI sent exact 14-field synthetic requests through the real API and displayed one-decimal percent scores consistent with six-decimal API scores. Low 0.002504 and high 0.831258: expected synthetic ordering observed, without asserting a clinical rule. All-null 0.221609 is an elevated association under research_balanced: **model limitation / requires review**, because fitted missing-value processing still produces a score and missing information does not mean low association. It is not evidence of a frontend or mapping defect.
+
+Changing only stroke_history from 0 to 1 in the low profile produced 0.080599 (7.8095 percentage-point response difference): **requires review** as a model-behavior observation, not causation. Live integration verified the same score under three named policies with classification changing at high_sensitivity_90. No mapping/frontend/backend issue was found in these checks. No retraining was performed.

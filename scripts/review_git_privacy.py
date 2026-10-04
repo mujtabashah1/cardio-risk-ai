@@ -44,7 +44,7 @@ def main():
         if relative.endswith('.csv'):
             header=next(csv.reader(text.splitlines()),[])
             if any(column in ['source_row_id','equality_group','training_role'] for column in header):blocked.append(relative+' (respondent membership header)')
-    required=['src/data/clean_data.py','src/data/mappings.py','src/models/train_models.py','src/models/train_all.py','src/models/evaluate.py','frontend/app.js','api/main.py','models/heart_disease_pipeline.joblib']
+    required=['src/data/clean_data.py','src/data/mappings.py','src/models/train_models.py','src/models/train_all.py','src/models/evaluate.py','frontend/app.js','frontend/src/App.tsx','frontend/src/api/client.ts','frontend/package-lock.json','frontend/src/test/app.test.tsx','api/main.py','models/heart_disease_pipeline.joblib']
     missing=[name for name in required if name not in files]
     report={'staged_files':len(files),'respondent_data_paths_found':blocked,'potential_credentials':credential_locations,'keyword_reference_files':keyword_files,'required_sources_missing':missing,'passed':not(blocked or credential_locations or missing),'scope':'Staged Git blobs; keyword references are reviewed separately; no credential values printed.'}
     args.report.write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')

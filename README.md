@@ -1,29 +1,69 @@
-# CardioRisk AI — local model research and QA
+# CardioRisk AI — cardiovascular profile research
 
-CardioRisk AI provides a frozen **CatBoost 1.0.0** model, FastAPI inference backend and native interactive model-testing website. It classifies patterns associated with **existing self-reported coronary heart disease / myocardial infarction** in CDC BRFSS 2021 data. It is not a diagnosis, clinical screening tool or future cardiovascular-risk calculator.
+CardioRisk AI provides a frozen **CatBoost 1.0.0** model, FastAPI inference backend and a modern React research application. It classifies patterns associated with **existing self-reported coronary heart disease / myocardial infarction** in CDC BRFSS 2021 data. It is not a diagnosis, clinical screening tool or future cardiovascular-risk calculator.
 
-## Running the local model testing application
+## Run the local full-stack application
 
-From the project directory, using Python 3.12:
+From the project root, using Python 3.12 and Node 22.12+:
 
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements-api-test.txt
-.\.venv\Scripts\python.exe scripts/start_local_testing.py
+.\.venv\Scripts\python.exe -m uvicorn api.main:app --reload --host 127.0.0.1 --port 8000
 ```
 
-For the existing workspace runtime:
+In a second terminal:
 
 ```powershell
-Set-Location 'C:\heart disease project\cardio-risk-ai'
-& '..\.runtime\python\python.exe' scripts/start_local_testing.py
+cd frontend
+npm install
+npm run dev
 ```
 
-Open **http://127.0.0.1:8000/testing/**. The API is **http://127.0.0.1:8000**, with interactive API documentation at `/docs`. Ctrl+C stops the server. If it is already running on port 8000, open the URL rather than starting a second process.
+**Website:** http://127.0.0.1:5173/ · **API:** http://127.0.0.1:8000 · **API documentation:** http://127.0.0.1:8000/docs
 
-Plain HTML/CSS/JavaScript is served by the existing FastAPI process, using same-origin POST /predict calls. No frontend build, Node installation, Docker or cloud hosting is needed to run the website. `python -m api` is an equivalent startup command. CORS defaults to no allowed origins; keep the server bound to loopback. See [local testing guide](docs/local_model_testing.md).
+In this workspace, portable Python and Node are installed under `../.runtime/`. Use `../.runtime/python/python.exe` for Python and add `C:\heart disease project\.runtime\node\node-v22.23.3-win-x64` to your terminal PATH for npm. Neither runtime is committed. The Vite dev server prints its URL and proxies `/api` to the loopback API; no CORS relaxation is required. [Frontend setup and test guide](frontend/README.md).
 
-The website includes synthetic presets, Unknown inputs, named research threshold selection, formatted raw API responses, one-field baseline comparisons and local manual QA recording with CSV export. Local QA records are not uploaded to an external service. Score differences describe model behavior, not causality.
+### Architecture and stack
+
+```mermaid
+flowchart TD
+    A[React + TypeScript frontend] -->|REST API through local Vite proxy| B[FastAPI backend]
+    B --> C[Python inference service]
+    C --> D[Frozen CatBoost v1.0.0 pipeline]
+```
+
+React 19, TypeScript, Vite, Tailwind CSS 4, shared design tokens, Zod, React Router, Lucide icons, Vitest and Testing Library. Python, FastAPI and CatBoost retain the existing inference contract. No ML inference runs in React.
+
+### Explore the application
+
+| Page | Experience |
+| --- | --- |
+| Home | Research introduction, how it works, model highlights |
+| Assessment | Four-step wizard: basic profile, lifestyle, medical history, review |
+| Results | Model Profile Score, API classification, grouped submitted answers |
+| About the Model | Dataset, 14 features, evaluation, thresholds, limitations |
+| Research / QA | API status, synthetic presets, all five policies, profile comparison, technical JSON, manual JSON export |
+
+Health profiles stay in browser memory. Unknown is null; invalid values are blocked. Regular assessment uses research_balanced. Thresholds are research operating points, not clinical cutoffs. No account, patient database or automatic upload is introduced.
+
+### Screenshots
+
+![Research home](docs/screenshots/react_home.png)
+
+<details><summary>Assessment, review, results and research QA</summary>
+
+![Assessment](docs/screenshots/react_assessment.png)
+![Review](docs/screenshots/react_review.png)
+![Results](docs/screenshots/react_results.png)
+![Research QA](docs/screenshots/react_qa.png)
+![Mobile](docs/screenshots/react_mobile.png)
+
+</details>
+
+All screenshots use synthetic inputs. [Responsive/browser QA](reports/model_qa/frontend_responsive_qa.md) · [Milestone report](reports/model_qa/react_completion_report.md).
+
+The earlier standalone testing page is preserved in frontend/legacy and is available at `/testing/` after starting the updated API. React runs separately through Vite.
 
 ## Dataset preparation and reproduction
 
@@ -113,3 +153,32 @@ Each milestone requires automated tests, applicable browser verification, Git st
 The ignore rules deny respondent-level data, candidates, prediction/SHAP arrays, training partitions, caches, credentials, manual notes and generated frontend output. Safe definitions, aggregate metrics, synthetic fixtures and the frozen artifact remain versioned. Do not weaken these exclusions for reproduction.
 
 Readiness remains **READY FOR LOCAL RESEARCH USE**. Container verification is pending and is outside this website/version-control task. No deployment, external validation, model change or mobile work is performed in this phase.
+
+## React milestone verification
+
+```powershell
+cd frontend
+npm test
+npm run build
+cd ..
+python scripts/verify_react_milestone.py
+python scripts/run_model_qa.py
+```
+
+37 mocked React tests, 69 Python regression tests, 10 real Vite-proxy/API integration checks, and 55 synthetic behavior profiles plus 56 boundaries pass. The retained standalone JavaScript tests also remain available. Live integration requires both local servers; unit tests use mocked HTTP. The fresh-clone optional cached respondent audit remains skipped when excluded validation/cache files are absent.
+
+## Application structure
+
+```text
+frontend/src/       React pages, components, API client, contract types, tests
+frontend/legacy/    Preserved standalone testing page
+api/               FastAPI routes and request safeguards
+src/data/          CDC mappings and cleaning source
+src/models/        Training/comparison/evaluation source
+src/inference/     Frozen-model loading and inference
+models/            Frozen runtime artifact and metadata
+docs/screenshots/  Synthetic-only UI evidence
+reports/model_qa/  Safe QA evidence; manual health notes stay local
+```
+
+No Docker, cloud deployment, external validation or mobile development was performed in this milestone. The model remains version 1.0.0.

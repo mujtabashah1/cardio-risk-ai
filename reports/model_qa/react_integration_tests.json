@@ -1,0 +1,206 @@
+{
+  "backend": {
+    "tests": 69,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 69
+  },
+  "integration_tests": 10,
+  "integration_passed": 10,
+  "checks": [
+    {
+      "test": "/health",
+      "status": "PASS",
+      "response": {
+        "status": "ok"
+      }
+    },
+    {
+      "test": "/ready",
+      "status": "PASS",
+      "response": {
+        "status": "ready",
+        "model_version": "1.0.0"
+      }
+    },
+    {
+      "test": "/model-info",
+      "status": "PASS",
+      "response": {
+        "model_name": "BRFSS CHD/MI Profile Score",
+        "model_family": "catboost",
+        "model_version": "1.0.0",
+        "feature_count": 14,
+        "feature_names": [
+          "age_group",
+          "sex",
+          "bmi",
+          "general_health",
+          "physical_activity",
+          "smoking_status",
+          "diabetes",
+          "stroke_history",
+          "kidney_disease",
+          "asthma",
+          "difficulty_walking",
+          "high_cholesterol",
+          "high_blood_pressure",
+          "alcohol_use"
+        ],
+        "target_description": "Existing self-reported CHD/MI status",
+        "default_threshold_profile": "research_balanced",
+        "supported_threshold_profiles": [
+          "research_balanced",
+          "youden",
+          "high_sensitivity_80",
+          "high_sensitivity_90",
+          "conventional_050"
+        ],
+        "intended_use": "Research profile classification",
+        "model_context": "This model classifies BRFSS-like health profiles associated with existing self-reported CHD/MI. It is not a medical diagnosis and does not estimate future cardiovascular-event risk.",
+        "limitations_summary": [
+          "Independent-test recall 51.55% and precision 31.68% at the default threshold.",
+          "Subgroup performance varies; no subgroup-specific thresholds.",
+          "Cross-sectional self-report and fixed-split missingness shifts; external validation required."
+        ]
+      }
+    },
+    {
+      "test": "low",
+      "status": "PASS",
+      "request": {
+        "age_group": 1,
+        "sex": 2,
+        "bmi": 22,
+        "general_health": 1,
+        "physical_activity": 1,
+        "smoking_status": 4,
+        "diabetes": 3,
+        "stroke_history": 0,
+        "kidney_disease": 0,
+        "asthma": 0,
+        "difficulty_walking": 0,
+        "high_cholesterol": 0,
+        "high_blood_pressure": 0,
+        "alcohol_use": 0
+      },
+      "response": {
+        "profile_score": 0.002504,
+        "classification": "lower_model_association",
+        "threshold": 0.20943938491134126,
+        "threshold_profile": "research_balanced",
+        "model_version": "1.0.0",
+        "model_name": "BRFSS CHD/MI Profile Score",
+        "model_context": "This model classifies BRFSS-like health profiles associated with existing self-reported CHD/MI. It is not a medical diagnosis and does not estimate future cardiovascular-event risk."
+      },
+      "proxy_matches_direct": true
+    },
+    {
+      "test": "high",
+      "status": "PASS",
+      "request": {
+        "age_group": 11,
+        "sex": 1,
+        "bmi": 34,
+        "general_health": 5,
+        "physical_activity": 0,
+        "smoking_status": 1,
+        "diabetes": 1,
+        "stroke_history": 1,
+        "kidney_disease": 1,
+        "asthma": 1,
+        "difficulty_walking": 1,
+        "high_cholesterol": 1,
+        "high_blood_pressure": 1,
+        "alcohol_use": 0
+      },
+      "response": {
+        "profile_score": 0.831258,
+        "classification": "elevated_model_association",
+        "threshold": 0.20943938491134126,
+        "threshold_profile": "research_balanced",
+        "model_version": "1.0.0",
+        "model_name": "BRFSS CHD/MI Profile Score",
+        "model_context": "This model classifies BRFSS-like health profiles associated with existing self-reported CHD/MI. It is not a medical diagnosis and does not estimate future cardiovascular-event risk."
+      },
+      "proxy_matches_direct": true
+    },
+    {
+      "test": "all_unknown",
+      "status": "PASS",
+      "request": {
+        "age_group": null,
+        "sex": null,
+        "bmi": null,
+        "general_health": null,
+        "physical_activity": null,
+        "smoking_status": null,
+        "diabetes": null,
+        "stroke_history": null,
+        "kidney_disease": null,
+        "asthma": null,
+        "difficulty_walking": null,
+        "high_cholesterol": null,
+        "high_blood_pressure": null,
+        "alcohol_use": null
+      },
+      "response": {
+        "profile_score": 0.221609,
+        "classification": "elevated_model_association",
+        "threshold": 0.20943938491134126,
+        "threshold_profile": "research_balanced",
+        "model_version": "1.0.0",
+        "model_name": "BRFSS CHD/MI Profile Score",
+        "model_context": "This model classifies BRFSS-like health profiles associated with existing self-reported CHD/MI. It is not a medical diagnosis and does not estimate future cardiovascular-event risk."
+      },
+      "proxy_matches_direct": true
+    },
+    {
+      "test": "threshold research_balanced",
+      "status": "PASS",
+      "response": {
+        "profile_score": 0.080599,
+        "classification": "lower_model_association",
+        "threshold": 0.20943938491134126,
+        "threshold_profile": "research_balanced",
+        "model_version": "1.0.0",
+        "model_name": "BRFSS CHD/MI Profile Score",
+        "model_context": "This model classifies BRFSS-like health profiles associated with existing self-reported CHD/MI. It is not a medical diagnosis and does not estimate future cardiovascular-event risk."
+      }
+    },
+    {
+      "test": "threshold high_sensitivity_80",
+      "status": "PASS",
+      "response": {
+        "profile_score": 0.080599,
+        "classification": "lower_model_association",
+        "threshold": 0.08757439013898735,
+        "threshold_profile": "high_sensitivity_80",
+        "model_version": "1.0.0",
+        "model_name": "BRFSS CHD/MI Profile Score",
+        "model_context": "This model classifies BRFSS-like health profiles associated with existing self-reported CHD/MI. It is not a medical diagnosis and does not estimate future cardiovascular-event risk."
+      }
+    },
+    {
+      "test": "threshold high_sensitivity_90",
+      "status": "PASS",
+      "response": {
+        "profile_score": 0.080599,
+        "classification": "elevated_model_association",
+        "threshold": 0.045767086681139546,
+        "threshold_profile": "high_sensitivity_90",
+        "model_version": "1.0.0",
+        "model_name": "BRFSS CHD/MI Profile Score",
+        "model_context": "This model classifies BRFSS-like health profiles associated with existing self-reported CHD/MI. It is not a medical diagnosis and does not estimate future cardiovascular-event risk."
+      }
+    },
+    {
+      "test": "invalid BMI",
+      "status": "PASS",
+      "http_status": 422
+    }
+  ],
+  "model_sha256_before": "4e313ef2810df2d4eb73c496db169cd963303da56abb9f1fa2e97522c21108f1",
+  "model_sha256_after": "4e313ef2810df2d4eb73c496db169cd963303da56abb9f1fa2e97522c21108f1"
+}

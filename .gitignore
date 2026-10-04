@@ -76,6 +76,9 @@ catboost_info/
 !/reports/model_qa/missing_input_tests.csv
 !/reports/model_qa/boundary_tests.csv
 !/reports/model_qa/local_website_*.png
+!/reports/model_qa/frontend_responsive_qa.md
+!/reports/model_qa/react_*.json
+!/reports/model_qa/react_completion_report.md
 # Manual notes may contain future personal data; keep this export local.
 /reports/model_qa/manual_profile_tests.csv
 /reports/model_qa/manual_model_qa.csv

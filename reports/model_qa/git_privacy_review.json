@@ -1,5 +1,5 @@
 {
-  "staged_files": 162,
+  "staged_files": 200,
   "respondent_data_paths_found": [],
   "potential_credentials": [],
   "keyword_reference_files": [
@@ -10,7 +10,10 @@
     "docs/model_inputs.md",
     "docs/model_v2_backlog.md",
     "docs/version_control.md",
+    "frontend/README.md",
+    "frontend/package-lock.json",
     "reports/deployment/container_verification.md",
+    "reports/model_qa/react_completion_report.md",
     "scripts/check_deployment.py",
     "scripts/package_release.py",
     "scripts/review_git_privacy.py",
