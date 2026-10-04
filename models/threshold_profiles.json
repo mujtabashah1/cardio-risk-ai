@@ -1,0 +1,93 @@
+{
+  "model_version": "1.0.0",
+  "default_profile": "research_balanced",
+  "policy_type": "Named research operating points, not clinical cutoffs",
+  "source": "reports/modeling/threshold_analysis.csv",
+  "profiles": {
+    "research_balanced": {
+      "threshold": 0.20943938491134126,
+      "purpose": "maximum_validation_F1",
+      "selection_basis": "Maximum validation F1",
+      "intended_use": "Default research operating point",
+      "clinical_cutoff": false,
+      "validation_metrics": {
+        "precision": 0.31516065421644823,
+        "recall": 0.5127382525004718,
+        "specificity": 0.9012874101320849,
+        "TP": 2717,
+        "TN": 53906,
+        "FP": 5904,
+        "FN": 2582,
+        "F1": 0.3903735632183908
+      }
+    },
+    "youden": {
+      "threshold": 0.08256882571678677,
+      "purpose": "maximum_Youden_J",
+      "selection_basis": "Maximum validation Youden J",
+      "intended_use": "Research sensitivity/specificity tradeoff",
+      "clinical_cutoff": false,
+      "validation_metrics": {
+        "precision": 0.2031021639715242,
+        "recall": 0.8129835818078883,
+        "specificity": 0.7173883965891992,
+        "TP": 4308,
+        "TN": 42907,
+        "FP": 16903,
+        "FN": 991,
+        "F1": 0.3250094304036213
+      }
+    },
+    "high_sensitivity_80": {
+      "threshold": 0.08757439013898735,
+      "purpose": "approximately_80pct_recall",
+      "selection_basis": "Approximately 80% validation recall",
+      "intended_use": "Research high-sensitivity operating point",
+      "clinical_cutoff": false,
+      "validation_metrics": {
+        "precision": 0.2076312695924765,
+        "recall": 0.7999622570296282,
+        "specificity": 0.7295268349774285,
+        "TP": 4239,
+        "TN": 43633,
+        "FP": 16177,
+        "FN": 1060,
+        "F1": 0.32969084192105774
+      }
+    },
+    "high_sensitivity_90": {
+      "threshold": 0.045767086681139546,
+      "purpose": "approximately_90pct_recall",
+      "selection_basis": "Approximately 90% validation recall",
+      "intended_use": "Research very-high-sensitivity operating point",
+      "clinical_cutoff": false,
+      "validation_metrics": {
+        "precision": 0.1639056915039868,
+        "recall": 0.8999811285148142,
+        "specificity": 0.5932619963216853,
+        "TP": 4769,
+        "TN": 35483,
+        "FP": 24327,
+        "FN": 530,
+        "F1": 0.2773077482192179
+      }
+    },
+    "conventional_050": {
+      "threshold": 0.5,
+      "purpose": "default_0.50",
+      "selection_basis": "Conventional classifier reference",
+      "intended_use": "Reference only",
+      "clinical_cutoff": false,
+      "validation_metrics": {
+        "precision": 0.5716064757160647,
+        "recall": 0.08662011700320815,
+        "specificity": 0.9942484534358803,
+        "TP": 459,
+        "TN": 59466,
+        "FP": 344,
+        "FN": 4840,
+        "F1": 0.1504424778761062
+      }
+    }
+  }
+}

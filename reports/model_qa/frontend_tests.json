@@ -1,0 +1,94 @@
+{
+  "passed": 22,
+  "failed": 0,
+  "tests": [
+    {
+      "name": "Exactly 14 schema fields render",
+      "status": "PASS"
+    },
+    {
+      "name": "All dropdown codes match API schema",
+      "status": "PASS"
+    },
+    {
+      "name": "Age categories map 1 through 13",
+      "status": "PASS"
+    },
+    {
+      "name": "Smoking lifetime meaning retained",
+      "status": "PASS"
+    },
+    {
+      "name": "All four diabetes categories retained",
+      "status": "PASS"
+    },
+    {
+      "name": "Missing controls encode null",
+      "status": "PASS"
+    },
+    {
+      "name": "Research balanced is default",
+      "status": "PASS"
+    },
+    {
+      "name": "Eight presets populate every field",
+      "status": "PASS"
+    },
+    {
+      "name": "BMI 28.5 remains unscaled",
+      "status": "PASS"
+    },
+    {
+      "name": "Low profile displays API score/classification/version",
+      "status": "PASS"
+    },
+    {
+      "name": "High profile displays matching raw response",
+      "status": "PASS"
+    },
+    {
+      "name": "Raw response toggle reveals formatted JSON",
+      "status": "PASS"
+    },
+    {
+      "name": "All five policies preserve score and change thresholds/classification correctly",
+      "status": "PASS"
+    },
+    {
+      "name": "Missing-data preset succeeds through rendered form",
+      "status": "PASS"
+    },
+    {
+      "name": "API errors render readable sanitized response",
+      "status": "PASS"
+    },
+    {
+      "name": "Failed prediction cannot be recorded as success",
+      "status": "PASS"
+    },
+    {
+      "name": "Baseline duplicates and one-field comparison uses API",
+      "status": "PASS"
+    },
+    {
+      "name": "Comparison rejects multiple changed features",
+      "status": "PASS"
+    },
+    {
+      "name": "QA recording saves locally then clears",
+      "status": "PASS"
+    },
+    {
+      "name": "CSV quoting preserves commas and quotes",
+      "status": "PASS"
+    },
+    {
+      "name": "Network failure displays recovery message",
+      "status": "PASS"
+    },
+    {
+      "name": "Edited in-flight profile discards stale response",
+      "status": "PASS"
+    }
+  ]
+}

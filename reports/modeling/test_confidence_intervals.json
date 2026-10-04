@@ -1,0 +1,31 @@
+{
+  "method": "150 labeled-record-group bootstrap replicates of frozen test predictions",
+  "seed": 42,
+  "metrics": {
+    "roc_auc": {
+      "estimate": 0.8467642532799694,
+      "CI95_low": 0.8414896940291162,
+      "CI95_high": 0.8514866867077904
+    },
+    "pr_auc": {
+      "estimate": 0.3447862174280643,
+      "CI95_low": 0.3336378937963388,
+      "CI95_high": 0.3578057649397859
+    },
+    "recall": {
+      "estimate": 0.5154775386938467,
+      "CI95_low": 0.502117345906286,
+      "CI95_high": 0.5258907045465495
+    },
+    "specificity": {
+      "estimate": 0.9015382043136599,
+      "CI95_low": 0.8988445383722087,
+      "CI95_high": 0.9036855252184167
+    },
+    "f1": {
+      "estimate": 0.39244144273602527,
+      "CI95_low": 0.38268542225150026,
+      "CI95_high": 0.4018372877710524
+    }
+  }
+}

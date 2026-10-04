@@ -1,0 +1,601 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "BRFSS CHD/MI Profile Score API",
+    "description": "Research classification of existing reported CHD/MI profiles; no diagnosis or future-risk endpoint.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "tags": [
+          "health"
+        ],
+        "summary": "Health",
+        "operationId": "health_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ready": {
+      "get": {
+        "tags": [
+          "health"
+        ],
+        "summary": "Ready",
+        "operationId": "ready_ready_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/model-info": {
+      "get": {
+        "tags": [
+          "model"
+        ],
+        "summary": "Model Info",
+        "operationId": "model_info_model_info_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/predict": {
+      "post": {
+        "tags": [
+          "prediction"
+        ],
+        "summary": "Predict",
+        "operationId": "predict_predict_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PredictionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PredictionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/predict/batch": {
+      "post": {
+        "tags": [
+          "prediction"
+        ],
+        "summary": "Batch",
+        "operationId": "batch_predict_batch_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BatchRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BatchRequest": {
+        "properties": {
+          "profiles": {
+            "items": {
+              "$ref": "#/components/schemas/HealthProfile"
+            },
+            "type": "array",
+            "maxItems": 1000,
+            "minItems": 1,
+            "title": "Profiles"
+          },
+          "threshold_profile": {
+            "type": "string",
+            "enum": [
+              "research_balanced",
+              "high_sensitivity_80",
+              "high_sensitivity_90",
+              "youden",
+              "conventional_050"
+            ],
+            "title": "Threshold Profile",
+            "default": "research_balanced"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "profiles"
+        ],
+        "title": "BatchRequest"
+      },
+      "BatchResponse": {
+        "properties": {
+          "predictions": {
+            "items": {
+              "$ref": "#/components/schemas/PredictionResponse"
+            },
+            "type": "array",
+            "title": "Predictions"
+          },
+          "count": {
+            "type": "integer",
+            "title": "Count"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "predictions",
+          "count"
+        ],
+        "title": "BatchResponse"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "HealthProfile": {
+        "properties": {
+          "age_group": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              null
+            ],
+            "title": "Age Group",
+            "description": "What is your age? Adults 18 or older only."
+          },
+          "sex": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "enum": [
+              1,
+              2,
+              null
+            ],
+            "title": "Sex",
+            "description": "What sex was recorded for you under the BRFSS respondent-sex question?"
+          },
+          "bmi": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 99.99,
+                "minimum": 12.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bmi",
+            "description": "Enter your measured height and weight to calculate BMI."
+          },
+          "general_health": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              null
+            ],
+            "title": "General Health",
+            "description": "In general, would you say your health is:"
+          },
+          "physical_activity": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "enum": [
+              0,
+              1,
+              null
+            ],
+            "title": "Physical Activity",
+            "description": "During the past 30 days, did you do physical activity or exercise other than your regular job?"
+          },
+          "smoking_status": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              null
+            ],
+            "title": "Smoking Status",
+            "description": "Have you smoked at least 100 cigarettes in your entire life? If yes, do you now smoke every day, some days, or not at all?"
+          },
+          "diabetes": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              null
+            ],
+            "title": "Diabetes",
+            "description": "Have you ever been told you had diabetes? If yes, was it only during pregnancy? Include a separate prediabetes/borderline option."
+          },
+          "stroke_history": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "enum": [
+              0,
+              1,
+              null
+            ],
+            "title": "Stroke History",
+            "description": "Have you ever been told you had a stroke?"
+          },
+          "kidney_disease": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "enum": [
+              0,
+              1,
+              null
+            ],
+            "title": "Kidney Disease",
+            "description": "Not including kidney stones, bladder infection or incontinence, were you ever told you had kidney disease?"
+          },
+          "asthma": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "enum": [
+              0,
+              1,
+              null
+            ],
+            "title": "Asthma",
+            "description": "Have you ever been told you had asthma?"
+          },
+          "difficulty_walking": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "enum": [
+              0,
+              1,
+              null
+            ],
+            "title": "Difficulty Walking",
+            "description": "Do you have serious difficulty walking or climbing stairs?"
+          },
+          "high_cholesterol": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "enum": [
+              0,
+              1,
+              null
+            ],
+            "title": "High Cholesterol",
+            "description": "Have you ever been told by a doctor, nurse, or other health professional that your cholesterol is high?"
+          },
+          "high_blood_pressure": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "enum": [
+              0,
+              1,
+              null
+            ],
+            "title": "High Blood Pressure",
+            "description": "Have you been told by a health professional that you have high blood pressure? Separate pregnancy-only and borderline answers map to 0."
+          },
+          "alcohol_use": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "enum": [
+              0,
+              1,
+              null
+            ],
+            "title": "Alcohol Use",
+            "description": "During the past 30 days, did you have at least one drink of any alcoholic beverage?"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "HealthProfile"
+      },
+      "PredictionRequest": {
+        "properties": {
+          "profile": {
+            "$ref": "#/components/schemas/HealthProfile"
+          },
+          "threshold_profile": {
+            "type": "string",
+            "enum": [
+              "research_balanced",
+              "high_sensitivity_80",
+              "high_sensitivity_90",
+              "youden",
+              "conventional_050"
+            ],
+            "title": "Threshold Profile",
+            "default": "research_balanced"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "profile"
+        ],
+        "title": "PredictionRequest"
+      },
+      "PredictionResponse": {
+        "properties": {
+          "profile_score": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Profile Score"
+          },
+          "classification": {
+            "type": "string",
+            "enum": [
+              "lower_model_association",
+              "elevated_model_association"
+            ],
+            "title": "Classification"
+          },
+          "threshold": {
+            "type": "number",
+            "title": "Threshold"
+          },
+          "threshold_profile": {
+            "type": "string",
+            "enum": [
+              "research_balanced",
+              "high_sensitivity_80",
+              "high_sensitivity_90",
+              "youden",
+              "conventional_050"
+            ],
+            "title": "Threshold Profile"
+          },
+          "model_version": {
+            "type": "string",
+            "title": "Model Version"
+          },
+          "model_name": {
+            "type": "string",
+            "title": "Model Name"
+          },
+          "model_context": {
+            "type": "string",
+            "title": "Model Context"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "profile_score",
+          "classification",
+          "threshold",
+          "threshold_profile",
+          "model_version",
+          "model_name",
+          "model_context"
+        ],
+        "title": "PredictionResponse"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

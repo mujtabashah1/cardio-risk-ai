@@ -1,0 +1,22 @@
+{
+  "staged_files": 160,
+  "respondent_data_paths_found": [],
+  "potential_credentials": [],
+  "keyword_reference_files": [
+    "README.md",
+    "docs/api.md",
+    "docs/api_contract.md",
+    "docs/model_inputs.md",
+    "docs/model_v2_backlog.md",
+    "docs/version_control.md",
+    "reports/deployment/container_verification.md",
+    "scripts/check_deployment.py",
+    "scripts/package_release.py",
+    "scripts/review_git_privacy.py",
+    "scripts/verify_release.py",
+    "tests/api/test_api.py"
+  ],
+  "required_sources_missing": [],
+  "passed": true,
+  "scope": "Staged Git blobs; keyword references are reviewed separately; no credential values printed."
+}

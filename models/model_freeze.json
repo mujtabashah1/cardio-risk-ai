@@ -1,0 +1,212 @@
+{
+  "timestamp": "2026-10-03T16:50:15.406690-07:00",
+  "test_predictions_accessed": false,
+  "model_specification": {
+    "model_name": "BRFSS CHD/MI Profile Classifier",
+    "model_family": "catboost",
+    "model_version": "1.0.0",
+    "training_dataset": "CDC BRFSS 2021; fixed original train.csv, partitioned into disjoint grouped model-fit and calibration-only subsets",
+    "target_definition": "Existing self-reported coronary heart disease or myocardial infarction; not prospective future risk or clinical diagnosis.",
+    "feature_set": "no_socioeconomic",
+    "feature_names": [
+      "age_group",
+      "sex",
+      "bmi",
+      "general_health",
+      "physical_activity",
+      "smoking_status",
+      "diabetes",
+      "stroke_history",
+      "kidney_disease",
+      "asthma",
+      "difficulty_walking",
+      "high_cholesterol",
+      "high_blood_pressure",
+      "alcohol_use"
+    ],
+    "preprocessing": "NativeCategories()",
+    "imputation": "BMI training median; categorical explicit Missing",
+    "encoding": "native categorical strings",
+    "hyperparameters": {
+      "depth": 6,
+      "device": "GPU",
+      "iterations": 220,
+      "learning_rate": 0.08,
+      "weighted": false
+    },
+    "class_balance_method": "none",
+    "calibration_method": "none",
+    "classification_threshold": 0.20943938491134126,
+    "threshold_rationale": "Maximum validation F1; alternatives for 80%/90% recall, Youden J, and 0.50 reported explicitly.",
+    "device_used": "GPU",
+    "inference_device": "CPU-compatible inference; XGBoost exported prediction device CPU",
+    "training_runtime": 21.743781500001205,
+    "validation_metrics": {
+      "accuracy": 0.8696647160914773,
+      "balanced_accuracy": 0.7070128313162783,
+      "precision": 0.31516065421644823,
+      "recall": 0.5127382525004718,
+      "specificity": 0.9012874101320849,
+      "f1": 0.3903735632183908,
+      "roc_auc": 0.8419577167036372,
+      "pr_auc": 0.3393608424682351,
+      "brier": 0.06298542080782658,
+      "log_loss": 0.21870608864724805,
+      "ece": 0.005451632211259926,
+      "TP": 2717,
+      "TN": 53906,
+      "FP": 5904,
+      "FN": 2582,
+      "threshold": 0.20943938491134126,
+      "rows": 65109,
+      "positive_count": 5299,
+      "positive_prevalence": 0.08138659785897495
+    },
+    "test_metrics": null,
+    "random_seed": 42,
+    "training_date": "2026-10-03T16:50:15.163587-07:00",
+    "software_versions": {
+      "Python": "3.12.10",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "libraries": {
+        "pandas": "3.0.6",
+        "numpy": "2.5.3",
+        "scikit-learn": "1.9.1",
+        "xgboost": "3.4.1",
+        "lightgbm": "4.7.0",
+        "catboost": "1.2.10",
+        "shap": "0.52.0",
+        "joblib": "1.6.0",
+        "matplotlib": "3.11.2",
+        "scipy": "1.18.1",
+        "pyarrow": "25.0.1",
+        "threadpoolctl": "3.7.0",
+        "optuna": "not installed"
+      },
+      "hardware": {
+        "CPU_model": "11th Gen Intel(R) Core(TM) i7-11850H @ 2.50GHz",
+        "logical_CPU_count": 16,
+        "Python": "3.12.10",
+        "RAM_total_bytes": 16890277888,
+        "RAM_free_bytes": 6082879488,
+        "nvidia_smi_query": "NVIDIA T1200 Laptop GPU, 4096, 3938, 610.60",
+        "GPU_model": "NVIDIA T1200 Laptop GPU",
+        "VRAM_total_MiB": 4096,
+        "VRAM_free_MiB": 3938,
+        "NVIDIA_driver": "610.60",
+        "nvidia_smi": "Sat Oct  3 16:18:30 2026       \n+-----------------------------------------------------------------------------------------+\n| NVIDIA-SMI 610.60                 KMD Version: 610.60        CUDA UMD Version: 13.3     |\n+-----------------------------------------+------------------------+----------------------+\n| GPU  Name                  Driver-Model | Bus-Id          Disp.A | Volatile Uncorr. ECC |\n| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |\n|                                         |                        |               MIG M. |\n|=========================================+========================+======================|\n|   0  NVIDIA T1200 Laptop GPU      WDDM  |   00000000:01:00.0 Off |                  N/A |\n| N/A   49C    P8              6W /   45W |       0MiB /   4096MiB |      0%      Default |\n|                                         |                        |                  N/A |\n+-----------------------------------------+------------------------+----------------------+\n\n+-----------------------------------------------------------------------------------------+\n| Processes:                                                                              |\n|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |\n|        ID   ID                                                               Usage      |\n|=========================================================================================|\n|  No running processes found                                                             |\n+-----------------------------------------------------------------------------------------+",
+        "driver_CUDA_compatibility_version": "13.3",
+        "CUDA_toolkit_nvcc": "FileNotFoundError(2, 'The system cannot find the file specified', None, 2, None)",
+        "XGBoost_build_info": {
+          "BUILTIN_PREFETCH_PRESENT": false,
+          "CUDA_VERSION": [
+            13,
+            3
+          ],
+          "DEBUG": false,
+          "MM_PREFETCH_PRESENT": true,
+          "THRUST_VERSION": [
+            3,
+            3,
+            3
+          ],
+          "USE_CUDA": true,
+          "USE_DLOPEN_NCCL": false,
+          "USE_FEDERATED": false,
+          "USE_NCCL": false,
+          "USE_NVCOMP": false,
+          "USE_OPENMP": true,
+          "USE_RMM": false,
+          "libxgboost": "C:\\heart disease project\\.runtime\\python\\Lib\\site-packages\\xgboost\\lib\\xgboost.dll"
+        },
+        "CUDA_runtime_version_note": "Driver compatibility is not the installed CUDA runtime version; XGBoost compiled CUDA details are recorded separately. No standalone runtime/toolkit version is assumed.",
+        "GPU_support": {
+          "xgboost": {
+            "supported": true,
+            "actual_device": "cuda:0",
+            "probe_seconds": 0.1666749999858439,
+            "warnings": []
+          },
+          "catboost": {
+            "supported": true,
+            "actual_device": "gpu",
+            "probe_seconds": 0.2636373999994248,
+            "warnings": []
+          },
+          "lightgbm": {
+            "supported": false,
+            "error": "LightGBMError('GPU Tree Learner was not enabled in this build.\\nPlease recompile with CMake option -DUSE_GPU=1')",
+            "probe_seconds": 0.007968199992319569
+          }
+        },
+        "CUDA_available": true
+      }
+    },
+    "known_limitations": [
+      "Cross-sectional, self-reported existing CHD/MI; no prospective 10-year endpoint, diagnosis validation, or temporal causality.",
+      "BRFSS 2021 U.S. and territory respondents; generalization outside comparable populations is unknown.",
+      "Unweighted respondent classification, not survey-weighted population prevalence estimation.",
+      "Class imbalance, screening-dependent cholesterol status, missing values, and possible subgroup differences.",
+      "Income nonresponse and U.S.-dollar groups reduce portability; socioeconomic and temporal-proxy fields need explicit interpretation.",
+      "The fixed grouped split has predictor-missingness shifts (notably BMI); it was preserved unchanged.",
+      "Repeated validation-based comparisons can overfit selection; external validation is required before clinical use.",
+      "GPU numerical training is not guaranteed bitwise deterministic despite seed 42.",
+      "Software-ready profile classification does not establish clinical validity."
+    ],
+    "model_fit_rows": 242904,
+    "calibration_only_rows": 60937,
+    "selected_experiment": "gpu_baseline__catboost_native__no_socioeconomic__most_frequent__default__none",
+    "refit_on_train_plus_validation": false,
+    "inference_100_rows_seconds": 0.035414200014201924,
+    "calibration_device": "CPU"
+  },
+  "pipeline_sha256": "4e313ef2810df2d4eb73c496db169cd963303da56abb9f1fa2e97522c21108f1",
+  "schema_sha256": "c0832919caae2c3f4e5d49bd6b2d4cfe7816a9f27fd0f8c0bf98ac0666fa535e",
+  "code_hashes": {
+    "src\\models\\config.py": "9b394cdf48add4db20dff9ca30cd5f965ebebaf83c204401e17c79a662bfe48d",
+    "src\\models\\estimators.py": "155539c02a18c9442801567e8f3cb17d690b7880828e8f752dcb86c98d438019",
+    "src\\models\\evaluate.py": "b9f16cb13108a82f382933161b9ef2a3fba8e75a04167a6dcb131039ae22dd59",
+    "src\\models\\hardware.py": "e59b5358141e7ff57b305fed0d09915decd341ec64b09a3ef64ab6a3fc13b76b",
+    "src\\models\\inference.py": "f0ffd76d3e8feba30e46d00e58564f2929d4e3170581072b7a57e5a85a54b37b",
+    "src\\models\\metrics.py": "7f8a28b35f30c042c624a1a8aff02d5d7fb3879728ca1350d6f6d327e2201486",
+    "src\\models\\model_selection.py": "5cab9a2d98c594d51157282105291f3dd5a9f95822f6ca53ef8979aad86e00cd",
+    "src\\models\\preflight.py": "f6c50b1285560f0c49f9ba456dc2e1240f4b2f5f41d379b72f6254a8beb02c8f",
+    "src\\models\\preprocessing.py": "6912ba0e9692d5161358535314f51b306c9d7b583da104cb706d0b12ce1bbff3",
+    "src\\models\\reporting.py": "49e1364a0a77ea778419828d060f971c1d5c35f529eda449f03ee29e6ffe8be6",
+    "src\\models\\train_all.py": "9056abeb5c0ac7c68e33109bbe8ebac5dfd4feffbbb23a6e6f79ce3a2d9636f7",
+    "src\\models\\train_models.py": "2de2bd06531aa6b3df714d9bbd73d8f55b3da71a9a3a2a6438d3dc97589ec6ba",
+    "src\\models\\__init__.py": "37e1c709eb8903e4815b127ad36d41ed993e5910e0835a64f7a70f96fa1baddc"
+  },
+  "selection_details": {
+    "leading_AP_experiment": "gpu_baseline__catboost_native__no_socioeconomic__most_frequent__default__none",
+    "selected_experiment": "gpu_baseline__catboost_native__no_socioeconomic__most_frequent__default__none",
+    "best_by_feature_set": {
+      "full_features": "calibrated__catboost_native_balanced__full_features__explicit_missing__default__isotonic",
+      "core_features": "tuned__catboost_native_tuned__core_features__most_frequent__default__none",
+      "no_socioeconomic": "gpu_baseline__catboost_native__no_socioeconomic__most_frequent__default__none",
+      "no_temporal_proxies": "tuned__catboost_native_tuned__no_temporal_proxies__most_frequent__default__none"
+    },
+    "leader_minus_core": {
+      "AP_difference": 0.05553678952253088,
+      "CI95_low": 0.049109164849630425,
+      "CI95_high": 0.06395605298190139,
+      "bootstrap_iterations": 150,
+      "method": "Paired labeled-record-group bootstrap of validation predictions; exploratory, not clinical significance"
+    },
+    "chosen_before_socio_policy_minus_no_socio": {
+      "AP_difference": 0.0,
+      "CI95_low": 0.0,
+      "CI95_high": 0.0,
+      "bootstrap_iterations": 150,
+      "method": "Paired labeled-record-group bootstrap of validation predictions; exploratory, not clinical significance"
+    },
+    "rule": "Favor portable core if its AP difference is not resolved by exploratory paired group-bootstrap CI; otherwise avoid socioeconomic variables when their AP gain is unresolved. Calibration minimizes validation Brier among raw/sigmoid/isotonic versions of each AP-leading raw model. Final threshold maximizes validation F1, with recall/specificity/precision tradeoffs reported. This is a research operating point, not a clinical cutoff.",
+    "threshold_choices": {
+      "default_0.50": 0.5,
+      "maximum_validation_F1": 0.20943938491134126,
+      "maximum_Youden_J": 0.08256882571678677,
+      "approximately_80pct_recall": 0.08757439013898735,
+      "approximately_90pct_recall": 0.045767086681139546
+    }
+  }
+}

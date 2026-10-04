@@ -1,0 +1,32 @@
+{
+  "leading_AP_experiment": "gpu_baseline__catboost_native__no_socioeconomic__most_frequent__default__none",
+  "selected_experiment": "gpu_baseline__catboost_native__no_socioeconomic__most_frequent__default__none",
+  "best_by_feature_set": {
+    "full_features": "calibrated__catboost_native_balanced__full_features__explicit_missing__default__isotonic",
+    "core_features": "tuned__catboost_native_tuned__core_features__most_frequent__default__none",
+    "no_socioeconomic": "gpu_baseline__catboost_native__no_socioeconomic__most_frequent__default__none",
+    "no_temporal_proxies": "tuned__catboost_native_tuned__no_temporal_proxies__most_frequent__default__none"
+  },
+  "leader_minus_core": {
+    "AP_difference": 0.05553678952253088,
+    "CI95_low": 0.049109164849630425,
+    "CI95_high": 0.06395605298190139,
+    "bootstrap_iterations": 150,
+    "method": "Paired labeled-record-group bootstrap of validation predictions; exploratory, not clinical significance"
+  },
+  "chosen_before_socio_policy_minus_no_socio": {
+    "AP_difference": 0.0,
+    "CI95_low": 0.0,
+    "CI95_high": 0.0,
+    "bootstrap_iterations": 150,
+    "method": "Paired labeled-record-group bootstrap of validation predictions; exploratory, not clinical significance"
+  },
+  "rule": "Favor portable core if its AP difference is not resolved by exploratory paired group-bootstrap CI; otherwise avoid socioeconomic variables when their AP gain is unresolved. Calibration minimizes validation Brier among raw/sigmoid/isotonic versions of each AP-leading raw model. Final threshold maximizes validation F1, with recall/specificity/precision tradeoffs reported. This is a research operating point, not a clinical cutoff.",
+  "threshold_choices": {
+    "default_0.50": 0.5,
+    "maximum_validation_F1": 0.20943938491134126,
+    "maximum_Youden_J": 0.08256882571678677,
+    "approximately_80pct_recall": 0.08757439013898735,
+    "approximately_90pct_recall": 0.045767086681139546
+  }
+}

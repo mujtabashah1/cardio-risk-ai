@@ -1,0 +1,3453 @@
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+  
+   
+  
+     
+        
+   
+          
+   
+ 
+Calculated Variables in the 2021 BRFSS Data File 
+Calculated Variables 
+in the 
+2021 Data File 
+of the 
+Behavioral Risk Factor Surveillance System 
+(Version #18 - Revised: June 17, 2022) 
+
+ 
+ 
+ 
+ 
+ 
+ 
+   
+ 
+ 
+ 
+ 
+ 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+ 
+Calculated Variables in the 2021 BRFSS Data File 
+Introduction 
+This document provides information on calculated variables for the 2021 Behavioral Risk Factor Surveillance 
+System (BRFSS) survey. These variables are calculated from responses to questions in the survey. 
+There are three types of calculated variables: 
+1. Variables used to stratify and weight the data (not included in this document). 
+2. Intermediate variables, which are derived from a question response and are used to calculate some other 
+variable or risk factor. Example: WTKG2 is derived from the WEIGHT2 variable in the survey. WTKG2 is then 
+used to calculate the body mass index variable (_BMI4). Most—but not all—of the intermediate variables end 
+with an underscore such as FTJUDAY_. 
+3. Variables used to categorize or classify respondents. Most of these begin with an underscore such as _BMI4. 
+Exceptions are: _DENSTR2, _GEOSTR, and _STATE, which are determined before the interview. Some of the 
+calculated variables group continuous variables—such as weight, age, or body mass index— into categories. 
+Other calculated variables regroup non-continuous variables to simplify analyses. The common focus of these 
+variables is on health behaviors associated with a risk of illness or injury. 
+The tables in this report include a description of response meanings and a copy of the code used to calculate 
+these variables in SAS®. The syntax of the code, as given, may or may not work in your statistical program. 
+  
+ 
+ 
+    
+ 
+  
+ 
+ 
+ 
+ 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Calculated Variables in the 2021 BRFSS Data File (continued) 
+NEW CALCULATED VARIABLES FOR 2021 
+_HLTHPLN was added in 2021. 
+CALCULATED VARIABLES WITH CHANGED NAMES FOR 2021 
+_CHOLCH2 changed to _CHOLCH3 due to CHOLCHK2 changing to CHOLCHK3 
+_DRDXAR2 changed to _DRDXAR3 due to HAVARTH4 changing to HAVARTH5 
+_INCOMG changed to _INCOMG1 because INCOME2 changing to INCOME3 
+_RFCHOL2 changed to _RFCHOL3 due to CHOLCHK2 changing to CHOLCHK3 and TOLDHI2 changing to 
+TOLDHI3 
+_RFHYPE5 changed to _RFHYPE6 due to BPHIGH5 changing to BPHIGH6. 
+_LMTWRK2 changed to _LMTWRK3 due to HAVARTH4 changing to HAVARTH5 
+_LMTACT2 changed to _LMTACT3 due to HAVARTH4 changing to HAVARTH5 
+_HCVU651 changed to _HCVU652 due to HLTPLN1 changing to PRIMINSR 
+_CPRACE changed to _CPRACE1 due to RCSBRAC1 changing to RCSBRAC2. 
+Page 3 of 41 June 17, 2022 
+  
+ 
+ 
+    
+    
+       
+     
+      
+    
+ 
+ 
+  
+    
+  
+  
+ 
+ 
+ 
+    
+    
+   
+ 
+ 
+   
+ 
+ 
+       
+    
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+    
+     
+   
+   
+ 
+ 
+   
+ 
+ 
+    
+    
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Calculated Variables in the 2021 BRFSS Data File (continued) 
+Section 1: Health Status 
+_RFHLTH Calculated variable for adults with good or better health. _RFHLTH is derived from GENHLTH. 
+1 Good or Better Health Respondents who reported having excellent, very good or good health. (GENHLTH =1, 2, 3) 
+2 Fair or Poor Health Respondents who reported having fair or poor health. (GENHLTH =4, 5) 
+9 Don’t know/Not Sure or 
+Refused/Missing 
+Respondents who reported they didn’t know, refused to answer, or had missing responses for 
+the general health status question. (GENHLTH =7, 9, missing) 
+SAS Code: IF 4 LE GENHLTH LE 5 THEN _RFHLTH=2; 
+ELSE IF 1 LE GENHLTH LE 3 THEN _RFHLTH=1; 
+ELSE _RFHLTH=9; 
+Section 1: Health Status 
+_METSTAT    Calculated variable for metropolitan status. _METSTAT is derived from _URBNRRL. 
+1 Metropolitan counties 
+(_URBNRRL = 1,2,3,4) 
+_URBNRRL = 1,2,3,4 (_URBNRRL = 1,2,3,4) 
+2 Nonmetropolitan counties 
+(_URBNRRL = 5,6) 
+_URBNRRL = 5,6 (_URBNRRL = 5,6) 
+. Not defined or Missing Not defined or Missing 
+SAS Code: IF _URBNRRL IN (1,2,3,4) THEN _METSTAT=1; 
+IF _URBNRRL IN (5,6) THEN _METSTAT=2; 
+IF _STATE=09 and _IMPCTY=005 THEN _METSTAT=1; 
+IF _STATE=25 and _IMPCTY=019 THEN _METSTAT=2; 
+IF _STATE=33 and _IMPCTY=003 THEN _METSTAT=2; 
+Section 1: Health Status 
+_URBSTAT Calculated variable for urban 
+rural status. _URBSTAT is derived from _URBNRRL. 
+1 Urban counties 
+(_URBNRRL = 1,2,3,4,5) 
+_URBNRRL = 1,2,3,4,5 (_URBNRRL = 1,2,3,4,5) 
+2 Rural counties 
+(_URBNRRL = 6) 
+_URBNRRL = 6 (_URBNRRL = 6) 
+. Not defined or Missing Not defined or Missing 
+SAS Code: IF _URBNRRL IN (1,2,3,4,5) THEN _URBSTAT=1; 
+IF _URBNRRL IN (6) THEN _URBSTAT=2; 
+IF _STATE=09 and _IMPCTY=005 THEN _URBSTAT=1; 
+IF _STATE=25 and _IMPCTY=019 THEN _URBSTAT=1; 
+IF _STATE=33 and _IMPCTY=003 THEN _URBSTAT=1; 
+Page 4 of 41 June 17, 2022 
+   
+ 
+ 
+    
+    
+        
+ 
+    
+ 
+  
+  
+   
+ 
+ 
+  
+    
+ 
+  
+ 
+   
+ 
+  
+ 
+    
+ 
+ 
+ 
+ 
+ 
+ 
+    
+       
+ 
+    
+ 
+  
+   
+ 
+ 
+  
+    
+ 
+ 
+  
+    
+ 
+  
+ 
+    
+ 
+ 
+ 
+ 
+ 
+ 
+Calculated Variables in the 2021 BRFSS Data File (continued) 
+Section 2: Healthy Days 
+_PHYS14D Calculated variable for 3 level not good physical health status: 0 days, 1-13 days, 14-30 days. 
+_PHYS14D is derived from PHYSHLTH. 
+1 Zero days when physical 
+health not good 
+Respondents who reported no days when their physical health was not good 
+(PHYSHLTH=88) 
+2 1-13 days when physical 
+health not good 
+Respondents who reported 1-13 days when their physical health was not good 
+(1 </= PHYSHLTH </= 13) 
+3 14+ days when physical 
+health not good 
+Respondents who reported 14 or more days when their physical health was not good 
+(14 </= PHYSHLTH </=30) 
+9 Don’t know/Refused/ 
+Missing 
+Respondents who reported they didn´t know, refused, or had missing values for PHYSHLTH 
+(PHYSHLTH=77,99, or missing) 
+SAS Code: IF PHYSHLTH IN (77,99,.) THEN _PHYS14D=9; 
+ELSE IF PHYSHLTH=88 THEN _PHYS14D=1; 
+ELSE IF 1 LE PHYSHLTH LE 13 THEN _PHYS14D=2; 
+ELSE _PHYS14D=3; 
+Section 2: Healthy Days 
+_MENT14D Calculated variable for 3 level not good mental health status: 0 days, 1-13 days, 14-30 days. 
+_MENT14D is derived from MENTHLTH. 
+1 Zero days when mental 
+health not good 
+Respondents who reported no days when their mental health was not good (MENTHLTH=88) 
+2 1-13 days when mental 
+health not good 
+Respondents who reported 1-13 days when their mental health was not good 
+(1 </= MENTHLTH </= 13) 
+3 14+ days when mental 
+health not good 
+Respondents who reported 14 or more days when their mental health was not good 
+(14 </= MENTHLTH </=30) 
+9 Don’t know/ Refused/ 
+Missing 
+Respondents who reported they didn´t know, refused, or had missing values for MENTHLTH 
+(MENTHLTH=77,99, or missing) 
+SAS Code: IF MENTHLTH IN (77,99,.) THEN _MENT14D=9; 
+ELSE IF MENTHLTH=88 THEN _MENT14D=1; 
+ELSE IF 1 LE MENTHLTH LE 13 THEN _MENT14D=2; 
+ELSE _MENT14D=3; 
+Page 5 of 41 June 17, 2022 
+  
+ 
+ 
+    
+     
+        
+ 
+    
+ 
+  
+  
+   
+ 
+    
+   
+ 
+ 
+  
+  
+    
+ 
+ 
+ 
+ 
+ 
+     
+    
+   
+    
+ 
+   
+   
+    
+ 
+   
+ 
+   
+ 
+ 
+ 
+   
+    
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Calculated Variables in the 2021 BRFSS Data File (continued) 
+Section 3: Health Care Access 
+_HLTHPLN Calculated variable for adults who had some form of health insurance. _HLTHPLN is derived from 
+PRIMINSR. 
+1 Have some form of 
+insurance 
+Respondents who said they had some form of health insurance 
+(PRIMINSR=1, 2, 3, 4, 5, 6, 7, 8, 9, 10) 
+2 Do not have some form of 
+health insurance 
+Respondents who said they did not have some form of health insurance (PRIMINSR=88) 
+9 Don´t know, refused or 
+missing insurance 
+response 
+Respondents who refused, didn´t know or were missing a response to having some form of 
+health insurance (PRIMINSR=77, 99 or missing) 
+SAS Code: IF PRIMINSR in (1,2,3,4,5,6,7,8,9,10) THEN _HLTHPLN=1; 
+ELSE IF PRIMINSR=88 THEN _HLTHPLN=2; 
+ELSE _HLTHPLN=9; 
+Section 3: Health Care Access 
+_HCVU652    Calculated variable for respondents aged 18-64 who have any form of health insurance. 
+_HCVU652 is derived from AGE and PRIMINSR. 
+1 Have some form of health 
+insurance 
+Respondents who reported having some form of health insurance 
+(18 </= AGE </= 64 and PRIMINSR=1, 2, 3, 4, 5, 6, 7, 8, 9, 10) 
+2 Do not have any form of 
+health insurance 
+Respondents who reported not having any form of health insurance 
+(18 </= AGE </= 64 and PRIMINSR=88) 
+9 Don’t know/Not Sure, 
+Refused or Missing 
+Respondents who reported that they didn´t know, were not sure, refused to report or had 
+missing responses for having health care coverage 
+(18 </= AGE </= 64 and PRIMINSR=77, 99, or missing or AGE =/> 65) 
+SAS Code: IF 18 LE AGE LE 64 THEN DO; 
+IF PRIMINSR in (1,2,3,4,5,6,7,8,9,10) THEN _HCVU652=1; 
+ELSE IF PRIMINSR=88 THEN _HCVU652=2; 
+ELSE _HCVU652=9; 
+END; 
+ELSE _HCVU652 = 9; 
+Page 6 of 41 June 17, 2022 
+  
+ 
+ 
+    
+   
+   
+     
+   
+ 
+ 
+   
+ 
+ 
+   
+ 
+ 
+   
+    
+  
+  
+ 
+ 
+ 
+    
+     
+    
+     
+  
+       
+    
+ 
+  
+  
+   
+    
+  
+  
+  
+  
+ 
+ 
+ 
+Calculated Variables in the 2021 BRFSS Data File (continued) 
+Section 4: Exercise 
+_TOTINDA    Calculated variable for adults who reported doing physical activity or exercise during the past 30 days 
+other than their regular job. _TOTINDA is derived from EXERANY2. 
+1 Had physical activity or 
+exercise 
+Respondents who reported doing any physical activity or exercise. (EXERANY2=1) 
+2 No physical activity or 
+exercise in last 30 days 
+Respondents who reported doing no physical activity or exercise. (EXERANY2=2) 
+9 Don’t know/Refused/ 
+Missing 
+Respondents who reported they didn’t know or refused to answer, and those with missing 
+responses for the physical activity/exercise question. (EXERANY2=7, 9, missing) 
+SAS Code: IF EXERANY2 IN (1) THEN _TOTINDA=1; 
+ELSE IF EXERANY2 IN (2) THEN _TOTINDA=2; 
+ELSE IF EXERANY2 IN (.,7,9) THEN _TOTINDA=9; 
+Section 5: Hypertension Awareness 
+_RFHYPE6 Calculated variable for adults who have been told they have high blood pressure by a doctor, nurse, or 
+other health professional. _RFHYPE6 is derived from BPHIGH6. 
+1 No Respondents that were not told their pressure is high by a health professional 
+(BPHIGH6=2, 3, or 4) 
+2 Yes Respondents who were told their pressure is high by a health professional (BPHIGH6=1) 
+9 Don’t know/Not Sure/ 
+Refused/Missing 
+Respondents who reported they didn´t know if they were told if their blood pressure is high, 
+those who refused to answer if they were told if their blood pressure is high, and those with 
+missing responses (BPHIGH6=7, 9, or missing) 
+SAS Code: IF BPHIGH6 = 1 THEN _RFHYPE6=2; 
+ELSE IF BPHIGH6 = 2 THEN _RFHYPE6=1; 
+ELSE IF BPHIGH6 = 3 THEN _RFHYPE6=1; 
+ELSE IF BPHIGH6 = 4 THEN _RFHYPE6=1; 
+ELSE IF BPHIGH6 IN (.,7,9) THEN _RFHYPE6=9 ; 
+Page 7 of 41 June 17, 2022 
+  
+ 
+ 
+    
+    
+       
+   
+   
+ 
+  
+  
+    
+ 
+  
+ 
+  
+ 
+ 
+    
+  
+ 
+    
+ 
+ 
+ 
+ 
+ 
+ 
+    
+    
+    
+ 
+      
+ 
+     
+  
+    
+ 
+ 
+   
+  
+ 
+  
+     
+  
+    
+ 
+ 
+ 
+ 
+Calculated Variables in the 2021 BRFSS Data File (continued) 
+Section 6: Cholesterol Awareness 
+_CHOLCH3 Calculated variable for cholesterol check within past five years. 
+_CHOLCH3 is derived from CHOLCHK3. 
+1 Had cholesterol checked 
+in past 5 years 
+Respondents who reported having had their cholesterol checked within the past five years 
+(CHOLCH3=2, 3, 4, 5, or 6) 
+2 Did not have cholesterol 
+checked in past 5 years 
+Respondents who reported not having had their cholesterol checked within the past five years 
+(CHOLCH3=8) 
+3 Have never had 
+cholesterol checked 
+Respondents who reported never having had their cholesterol checked (CHOLCH3=1) 
+9 Don’t know/Not Sure or 
+Refused/ Missing 
+Respondents who reported they didn´t know if they had their cholesterol checked by a health 
+professional, those who refused to answer if they had their cholesterol checked by a health 
+professional, and those with missing responses (CHOLCH3=7, 9 or missing) 
+SAS Code: IF CHOLCHK3=1 THEN _CHOLCH3=3; 
+ELSE IF CHOLCHK3 in (2, 3, 4, 5, 6) THEN _CHOLCH3=1; 
+ELSE IF CHOLCHK3 = 8 THEN _CHOLCH3=2; 
+ELSE _CHOLCH3=9; 
+Section 6: Cholesterol Awareness 
+_RFCHOL3 Calculated variable for adults who have had their cholesterol checked and have been told by a doctor, 
+nurse, or other health professional that it was high. _RFCHOL3 is derived from CHOLCHK3 and 
+TOLDHI3. 
+1 No Respondents who reported having had their blood cholesterol checked but had not been told it 
+was high (CHOLCHK3=2,3,4,5,6 or 8 and TOLDHI3=2) 
+2 Yes Respondents who reported having had their blood cholesterol checked and had been told that 
+they have high blood cholesterol (CHOLCHK3=2,3,4,5,6 or 8 and TOLDHI3=1) 
+9 Don’t know/Not Sure or 
+Refused/ Missing 
+Respondents who reported they didn´t know if they had their blood cholesterol checked, those 
+who reported they didn´t know if they have been told their blood cholesterol was high, those 
+who refused to answer if they had their blood cholesterol checked, those who refused to answer 
+if they had been told that their blood cholesterol was high, and those with missing responses 
+(CHOLCHK3=2,3,4,5,6 or 8 and TOLDHI3=7,9, or missing) 
+. Missing Respondents who reported they have not had their blood cholesterol checked 
+(CHOLCHK3=1,7,9 or missing) 
+SAS Code: IF CHOLCHK3 in (2,3,4,5,6,8) AND TOLDHI3=1 THEN _RFCHOL3=2; 
+ELSE IF CHOLCHK3 in (2,3,4,5,6,8) AND TOLDHI3=2 THEN _RFCHOL3=1; 
+ELSE IF CHOLCHK3 in (2,3,4,5,6,8) AND TOLDHI3 in (7,9,.) THEN 
+_RFCHOL32=9; 
+Page 8 of 41 June 17, 2022 
+  
+ 
+ 
+    
+     
+   
+   
+   
+ 
+ 
+    
+ 
+ 
+     
+ 
+    
+ 
+ 
+ 
+ 
+     
+       
+  
+      
+ 
+    
+ 
+    
+ 
+  
+ 
+  
+ 
+    
+  
+  
+ 
+ 
+ 
+Calculated Variables in the 2021 BRFSS Data File (continued) 
+Section 7: Chronic Health Conditions 
+_MICHD      Calculated variable for respondents who have ever reported having coronary heart disease (CHD) or 
+myocardial infarction (MI). _MICHD is derived from CVDINFR4 and CVDCRHD4. 
+1 Reported having MI or 
+CHD 
+Respondents who reported having had MI or CHD (CVDINFR4=1 OR CVDCRHD4=1) 
+2 Did not report having MI 
+or CHD 
+Respondents who reported not having had MI and CHD (CVDINFR4=2 AND CVDCRHD4=2) 
+. Not asked or Missing Respondents who reported they didn´t know, refused, or had a missing value for the MI or 
+CHD questions (CVDINFR4=7, 9 OR MISSING OR CVDCRHD4=7, 9, OR MISSING) 
+SAS Code: IF CVDINFR4=1 OR CVDCRHD4=1 THEN _MICHD=1; 
+ELSE IF CVDINFR4=2 AND CVDCRHD4=2 THEN _MICHD=2; 
+Section 7: Chronic Health Conditions 
+_LTASTH1 Calculated variable for adults who have ever been told they have asthma. 
+_LTASTH1 is derived from ASTHMA3. 
+1 No Respondents who have not been told by a doctor, nurse, or health professional that they had 
+asthma. (ASTHMA3=2) 
+2 Yes Respondents who have been told by a doctor, nurse, or health professional that they had 
+asthma. (ASTHMA3=1) 
+9 Don’t know/Not Sure or 
+Refused/Missing 
+Respondents who reported they did not know if they had been told by a doctor, nurse , or health 
+professional that they had asthma, those who refused to answer if they had been told by a 
+doctor, nurse. or health professional that they had asthma, or those with missing responses. 
+(ASTHMA3=7, 9, missing) 
+SAS Code: IF ASTHMA3=1 THEN _LTASTH1=2; 
+ELSE IF ASTHMA3=2 THEN _LTASTH1=1; 
+ELSE _LTASTH1=9; 
+Page 9 of 41 June 17, 2022 
+  
+ 
+ 
+    
+     
+      
+  
+      
+ 
+     
+ 
+    
+ 
+  
+ 
+  
+  
+    
+  
+  
+  
+ 
+ 
+ 
+     
+      
+  
+     
+ 
+     
+  
+      
+ 
+    
+ 
+ 
+ 
+  
+ 
+  
+    
+  
+  
+  
+ 
+ 
+ 
+Calculated Variables in the 2021 BRFSS Data File (continued) 
+Section 7: Chronic Health Conditions 
+_CASTHM1 Calculated variable for adults who have been told they currently have asthma. 
+_CASTHM1 is derived from ASTHMA3 and ASTHNOW. 
+1 No Respondents who have not been told by a doctor, nurse, or health professional that they had 
+asthma or do not still have asthma. (ASTHMA3=2 or ASTHMA3=1 and ASTHNOW=2) 
+2 Yes Respondents who have been told by a doctor, nurse, or health professional that they had asthma 
+and that they still have asthma. (ASTHMA3=1 and ASTHNOW=1) 
+9 Don’t know/Not Sure or 
+Refused/Missing 
+Respondents who reported they did not know if they had been told by a doctor, nurse , or health 
+professional that they had asthma, those who refused to answer if they had been told by a 
+doctor, nurse, or health professional that they had asthma, those who did not know if they still 
+had asthma, those who refused to answer if they still had asthma, or those with missing 
+responses. (ASTHMA3=7, 9, missing; or ASTHNOW=7, 9, missing) 
+SAS Code: IF ASTHMA3=2 THEN _CASTHM1=1; 
+ELSE IF ASTHMA3=1 AND ASTHNOW=1 THEN _CASTHM1=2; 
+ELSE IF ASTHMA3=1 AND ASTHNOW=2 THEN _CASTHM1=1; 
+ELSE _CASTHM1=9; 
+Section 7: Chronic Health Conditions 
+_ASTHMS1 Calculated variable for computed asthma status. 
+_ASTHMS1 is derived from ASTHMA3 and ASTHNOW. 
+1 Current Respondents who have been told by a doctor, nurse, or health professional that they had asthma 
+and that they still have asthma. (ASTHMA3=1and ASTHNOW=1) 
+2 Former Respondents who have been told by a doctor, nurse, or health professional that they had asthma 
+but do not still have asthma. (ASTHMA3=1 and ASTHNOW=2) 
+3 Never Respondents who have not been told by a doctor, nurse, or health professional that they had 
+asthma. (ASTHMA3=2) 
+9 Don’t know/Not Sure or 
+Refused/Missing 
+Respondents who reported they didn’t know if they had been told by a doctor, nurse , or health 
+professional that they had asthma, those who refused to answer if they had been told by a 
+doctor, nurse, or health professional that they had asthma, those who didn’t know if they still 
+had asthma, those that refused to answer if they still had asthma, or those with missing 
+responses. (ASTHMA3=7, 9, missing; or ASTHNOW=7, 9, missing) 
+SAS Code: IF ASTHMA3=1 AND ASTHNOW=1 THEN _ASTHMS1=1; 
+ELSE IF ASTHMA3=1 AND ASTHNOW=2 THEN _ASTHMS1=2; 
+ELSE IF ASTHMA3=2 THEN _ASTHMS1=3; 
+ELSE _ASTHMS1=9; 
+Page 10 of 41 June 17, 2022 
+  
+ 
+ 
+    
+   
+        
+   
+    
+  
+ 
+  
+    
+ 
+ 
+ 
+  
+    
+  
+  
+ 
+ 
+ 
+   
+      
+  
+  
+ 
+ 
+ 
+  
+ 
+ 
+ 
+   
+ 
+  
+   
+ 
+ 
+ 
+  
+ 
+   
+ 
+ 
+    
+  
+  
+  
+  
+  
+  
+ 
+ 
+ 
+Calculated Variables in the 2021 BRFSS Data File (continued) 
+Section 8: Arthritis 
+_DRDXAR3 Calculated variable for respondents who have had a doctor diagnose them as having some form of 
+arthritis. _DRDXAR3 is derived from HAVARTH5. 
+1 Diagnosed with arthritis Respondents who have been told by a doctor they had arthritis (HAVARTH5=1) 
+2 Not diagnosed with 
+arthritis 
+Respondents who have not been told by a doctor they had arthritis (HAVARTH5=2) 
+. Don´t know/Not Sure/ 
+Refused/Missing 
+Respondents who reported they didn´t know if they had been told by a doctor they had arthritis, 
+those who refused to answer if they had been told by a doctor they had arthritis, and those with 
+missing responses (HAVARTH5=7,9, or missing) 
+SAS Code: IF HAVARTH5 = 1 THEN _DRDXAR3=1; 
+ELSE IF HAVARTH5 = 2 THEN _DRDXAR3=2; 
+ELSE IF HAVARTH5 IN (7,9,.) THEN _DRDXAR3=.; 
+Section 8: Arthritis 
+_LMTACT3 Calculated variable for limited usual activities. 
+_LMTACT3 is derived from HAVARTH5 and LMTJOIN3. 
+1 Told have arthritis and 
+have limited usual 
+activities 
+Respondents who have been told they have arthritis and have limited usual activities 
+(HAVARTH5=1 and LMTJOIN3=1) 
+2 Told have arthritis and no 
+limited usual activities 
+Respondents who have been told they have arthritis and have no limited usual activities 
+(HAVARTH5=1 and LMTJOIN3=2) 
+3 Not told they have 
+arthritis 
+Respondents who have not been told they have arthritis (HAVARTH5=2) 
+9 Don´t know, refused or 
+missing usual activities 
+limited 
+Respondents who have been told they have arthritis and reported they didn´t know, refused, or 
+had a missing value for limited usual activities (HAVARTH5=1 and LMTJOIN3=7, 9 or 
+missing) 
+. Don´t know, refused or 
+missing arthritis or not 
+asked 
+Respondents who refused, didn´t know or were missing a response to being told they had 
+arthritis (HAVARTH5=7, 9 or missing) 
+SAS Code: IF HAVARTH5=1 THEN DO; 
+IF LMTJOIN3=1 THEN _LMTACT3=1; 
+ELSE IF LMTJOIN3=2 THEN _LMTACT3=2; 
+ELSE _LMTACT3=9; 
+END; 
+ELSE IF HAVARTH5=2 THEN _LMTACT3=3; 
+ELSE _LMTACT3=.; 
+Page 11 of 41 June 17, 2022 
+  
+ 
+ 
+    
+   
+  
+   
+  
+ 
+ 
+  
+  
+ 
+  
+ 
+   
+ 
+  
+   
+ 
+ 
+ 
+   
+  
+ 
+ 
+    
+  
+  
+  
+  
+  
+  
+ 
+ 
+ 
+   
+         
+     
+    
+   
+  
+ 
+     
+   
+       
+     
+    
+ 
+ 
+ 
+ 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+Calculated Variables in the 2021 BRFSS Data File (continued) 
+Section 8: Arthritis 
+_LMTWRK3    Calculated variable for limited work activities. 
+_LMTWRK3 is derived from HAVARTH5 and ARTHDIS2. 
+1 Told have arthritis and 
+have limited work 
+Respondents who have been told they have arthritis and have limited work 
+(HAVARTH5=1 and ARTHDIS2=1) 
+2 Told have arthritis and no 
+limited work 
+Respondents who have been told they have arthritis and have no limited work 
+(HAVARTH5=1 and ARTHDIS2=2) 
+3 Not told they have 
+arthritis 
+Respondents who have not been told they have arthritis (HAVARTH5=2) 
+9 Don´t know, refused or 
+missing work limited 
+Respondents who have been told they have arthritis and reported they didn´t know, refused, or 
+had a missing value for limited work (HAVARTH5=1 and ARTHDIS2=7, 9 or missing) 
+. Don´t know, refused or 
+missing arthritis, or not 
+asked 
+Respondents who refused, didn´t know or were missing a response to being told they had 
+arthritis (HAVARTH5=7, 9 or missing) 
+SAS Code: IF HAVARTH5=1 THEN DO; 
+IF ARTHDIS2=1 THEN _LMTWRK3=1; 
+ELSE IF ARTHDIS2=2 THEN _LMTWRK3=2; 
+ELSE _LMTWRK3=9; 
+END; 
+ELSE IF HAVARTH5=2 THEN _LMTWRK3=3; 
+ELSE _LMTWRK3=.; 
+Section 9: Demographics 
+MRACORG1 Calculated variable for mrace1 with 77,88,99s removed. MRACORG1 is derived from MRACE1 in 
+the original order in which the data were received from the state 
+territory. If MRACE1 is greater than 99 then any 77, 80, 88, or 99 is removed. If MRACE1 is less 
+than or equal to 99 then MRACORG1 is equal to MRACE1. 
+10 -
+6.05E9 
+Race code(s) Respondents reported race or races in original order 
+(MRACE1=10, 20, 30, 40, 50, 60, or MRACE1 > 99) 
+77 Don’t know/Not sure Respondents who reported they didn´t know, or weren´t sure of their race. (MRACE1=77) 
+99 Refused Respondents who refused to give their race. (MRACE1=99) 
+SAS Code: IF (LEFT(COMPRESS(LENGTH(MRACE1)))) > 2 THEN DO; 
+MRACORG77=PUT(LEFT(COMPRESS(TRANWRD(MRACE1,"77",""))),28.); 
+MRACORG88=PUT(LEFT(COMPRESS(TRANWRD(MRACORG77,"88",""))),28.); 
+MRACORG99=PUT(LEFT(COMPRESS(TRANWRD(MRACORG88,"99",""))),28.); 
+MRACORG1=PUT(LEFT(COMPRESS(TRANWRD(MRACORG99,"80",""))),28.); 
+END; 
+ELSE DO; 
+MRACORG1=MRACE1; 
+END; 
+Page 12 of 41 June 17, 2022 
+  
+ 
+ 
+    
+   
+         
+     
+ 
+ 
+ 
+    
+  
+      
+     
+    
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Calculated Variables in the 2021 BRFSS Data File (continued) 
+Section 9: Demographics 
+MRACASC1 Calculated variable for mracorg1 with 77,88,99s removed, in ascending order. MRACASC1 is 
+derived from MRACORG1. The values that make up MRACORG1 are sorted from smallest to 
+largest. 
+10 -
+1.02E9 
+Race code(s) Respondents reported race or races in ascending order 
+(MRACE1=10, 20, 30, 40, 50, 60, or MRACORG1 > 99) 
+77 Don’t know/Not sure Respondents who reported they didn´t know or weren´t sure of their race. (MRACORG1=77) 
+99 Refused Respondents who refused to give their race. (MRACORG1=99) 
+SAS Code: IF (LEFT(COMPRESS(LENGTH(MRACORG1)))) > 2 THEN DO; 
+array pairs[14]; 
+length MRAC_SORTED $28; 
+counter = .; 
+do pos = 1 to length(MRACORG1) by 2; 
+counter + 1; 
+pairs[counter] = input(substr(MRACORG1, pos, 2), 2.); 
+end; 
+do i = 1 to counter; 
+MRAC_SORTED = cats(MRAC_SORTED, smallest(i, of pairs[*])); 
+end; 
+drop pairs: i counter pos; 
+MRAC_VALID=MRAC_SORTED; 
+%macro swapthis; 
+%do M = 1 %to 14; 
+%LET R=%eval((&M.*2)-1); 
+%do s = 41 %to 47; 
+if substr(MRAC_VALID,&R.,2)=&s. then do; 
+MRAC_VALID = TRANWRD(MRAC_VALID,"&S.","40"); 
+end; 
+%end; 
+%do t = 51 %to 54; 
+if substr(MRAC_VALID,&R.,2)=&t. then do; 
+MRAC_VALID = TRANWRD(MRAC_VALID,"&T.","50"); 
+end; 
+%end; 
+%end; 
+%mend; 
+%swapthis; 
+DO Z=1 TO 4; 
+MRAC_5050= 
+PUT(LEFT(COMPRESS(TRANWRD(MRAC_VALID,"5050","50XX"))),28.); 
+MRAC_ONE50= PUT(LEFT(COMPRESS(TRANWRD(MRAC_5050,"XX",""))),28.); 
+END; 
+MRAC_ONE40=MRAC_ONE50; 
+DO Y=1 TO 7; 
+MRAC_4040= 
+PUT(LEFT(COMPRESS(TRANWRD(MRAC_ONE40,"4040","40XX"))),28.); 
+MRAC_ONE40= PUT(LEFT(COMPRESS(TRANWRD(MRAC_4040,"XX",""))),28.); 
+END; 
+MRACASC1=INPUT(MRAC_ONE40,28.0); 
+END; 
+ELSE DO; 
+MRACASC1=INPUT(MRACORG1,28.0); 
+END; 
+Page 13 of 41 June 17, 2022 
+  
+ 
+ 
+    
+ 
+   
+          
+  
+   
+     
+ 
+   
+ 
+ 
+  
+   
+ 
+   
+ 
+    
+  
+    
+ 
+   
+   
+      
+ 
+    
+  
+   
+   
+ 
+     
+ 
+    
+ 
+    
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Calculated Variables in the 2021 BRFSS Data File (continued) 
+Section 9: Demographics 
+_PRACE1 Calculated variable for preferred race category. _PRACE1 is derived from MRACASC1 and 
+ORACE3. If MRACEASC1 has only one response, then _PRACE1=MRACASC1. If MRACASC1 
+has more than one response, then _PRACE1=ORACE3. 
+1 White Respondents who reported their race as white. 
+(MRACASC1=10 or MRACASC1>99 and ORACE3=10) 
+2 Black or African 
+American 
+Respondents who reported their race as black. 
+(MRACASC1=20 or MRACASC1>99 and ORACE3=20) 
+3 American Indian or 
+Alaskan Native 
+Respondents who reported their race as American Indian or Alaska Native. 
+(MRACASC1=30 or MRACASC1>99 and ORACE3=30) 
+4 Asian Respondents who reported their race as Asian. 
+(MRACASC1=40 or MRACASC1>99 and ORACE3=40) 
+5 Native Hawaiian or other 
+Pacific Islander 
+Respondents who reported their race as Native Hawaiian or Pacific Islander. 
+(MRACASC1=50 or MRACASC1>99 and ORACE3=50) 
+6 Other race Respondents who report they are of some other race group not listed in the question responses. 
+(MRACASC1=60 or MRACASC1>99 and ORACE3=60) 
+7 No preferred race Respondents who reported they are of more than one race group but did not report a preference 
+or the preferred race is missing (MRACASC1>99 and ORACE3=77 or 99) 
+8 Multiracial but preferred 
+race not answered 
+Respondents who reported they are of more than one race group but did not answer the question 
+about which race best represents them NOTE: This is a data collection error. 
+(MRACASC1 >99 and ORACE3=80 or MRACASC1 >99 and ORACE3= Missing) 
+77 Don’t know/Not sure Respondents who reported they didn´t know their race and did not answer the question about 
+which race best represents them. (MRACASC1=77) 
+99 Refused Respondents who refused to give their race and did not answer the question about which race 
+best represents them. (MRACASC1=99) 
+SAS Code: IF MRACASC1 EQ 10 THEN _PRACE1 = 1; 
+ELSE IF MRACASC1 EQ 20 THEN _PRACE1 = 2; 
+ELSE IF MRACASC1 EQ 30 THEN _PRACE1 = 3; 
+ELSE IF 40 LE MRACASC1 LE 49 THEN _PRACE1=4; 
+ELSE IF 50 LE MRACASC1 LE 59 THEN _PRACE1=5; 
+ELSE IF MRACASC1 EQ 60 THEN _PRACE1=6; 
+ELSE IF MRACASC1 EQ 77 THEN _PRACE1=77; 
+ELSE IF MRACASC1 EQ 99 THEN _PRACE1=99; 
+ELSE IF MRACASC1 GT 99 THEN DO; 
+IF ORACE3=77 THEN _PRACE1=7; 
+ELSE IF ORACE3=99 THEN _PRACE1=7; 
+ELSE IF ORACE3=. THEN _PRACE1=8; 
+ELSE IF ORACE3=80 THEN _PRACE1=8; 
+ELSE IF ORACE3 EQ 10 THEN _PRACE1=1; 
+ELSE IF ORACE3 EQ 20 THEN _PRACE1=2; 
+ELSE IF ORACE3 EQ 30 THEN _PRACE1=3; 
+ELSE IF 40 LE ORACE3 LE 49 THEN _PRACE1=4; 
+ELSE IF 50 LE ORACE3 LE 59 THEN _PRACE1=5; 
+ELSE IF ORACE3 EQ 60 THEN _PRACE1=6; 
+END; 
+Page 14 of 41 June 17, 2022 
+  
+ 
+ 
+    
+   
+         
+   
+     
+   
+    
+   
+ 
+  
+   
+ 
+  
+ 
+    
+    
+ 
+ 
+ 
+     
+ 
+    
+     
+    
+    
+  
+  
+  
+  
+ 
+  
+ 
+ 
+ 
+ 
+ 
+Calculated Variables in the 2021 BRFSS Data File (continued) 
+Section 9: Demographics 
+_MRACE1 Calculated variable for calculated multiracial race categorization. _MRACE1 is derived from 
+MRACASC1. If respondents reported more than one race, they are assigned to the multiracial 
+category. If MRACASC1 is less than 40 or equal to 60, then _MRACE1=MRACASC1. If 
+MRACASC1 is 40–47 then _MRACE1=40. If MRACASC1 is 50–54 then _MRACE1=50. 
+1 White only Respondents who reported they are white. (MRACASC1=10) 
+2 Black or African 
+American only 
+Respondents who report they are black. (MRACASC1=20) 
+3 American Indian or 
+Alaskan Native only 
+Respondents who reported they are American Indian or Alaska Native. 
+(MRACASC1=30) 
+4 Asian Only Respondents who reported they are Asian. (MRACASC1=40,41,42,43,44,45,46,47) 
+5 Native Hawaiian or other 
+Pacific Islander only 
+Respondents who reported they are native Hawaiian or Pacific Islander. 
+(MRACASC1=50,51,52,53,54) 
+6 Other race only Respondents who reported they are of some other race group not listed in the question 
+responses. (MRACASC1=60) 
+7 Multiracial Respondents who reported they are of more than one race group (MRACASC1>99) 
+77 Don’t know/Not sure Respondents who reported they did not know their race. (MRACASC1=77) 
+99 Refused Respondents who refused to give their race information. (MRACASC1=99) 
+SAS Code: IF MRACASC1 GT 99 THEN _MRACE1 = 7; 
+ELSE IF MRACASC1 EQ 99 THEN _MRACE1 = 99; 
+ELSE IF MRACASC1 EQ 77 THEN _MRACE1 = 77; 
+ELSE IF MRACASC1 EQ 10 THEN _MRACE1 = 1; 
+ELSE IF MRACASC1 EQ 20 THEN _MRACE1 = 2; 
+ELSE IF MRACASC1 EQ 30 THEN _MRACE1 = 3; 
+ELSE IF 40 LE MRACASC1 LE 47 THEN _MRACE1 = 4; 
+ELSE IF 50 LE MRACASC1 LE 54 THEN _MRACE1 = 5; 
+ELSE IF MRACASC1=60 THEN _MRACE1=6; 
+Page 15 of 41 June 17, 2022 
+  
+ 
+ 
+    
+   
+         
+   
+  
+    
+   
+ 
+  
+   
+ 
+ 
+    
+    
+    
+    
+    
+    
+    
+    
+     
+    
+    
+    
+    
+    
+    
+     
+    
+    
+ 
+ 
+ 
+ 
+ 
+ 
+Calculated Variables in the 2021 BRFSS Data File (continued) 
+Section 9: Demographics 
+_M_RACE Calculated variable for calculated multiracial race categorization. _M_RACE is derived from 
+MRACASC1. If respondents reported more than one race they are assigned to the multiracial 
+category. Otherwise _M_RACE=MRACASC1. 
+10 White Respondents who reported being white (MRACASC1=10) 
+20 Black or African 
+American 
+Respondents who reported being black or African American (MRACASC1=20) 
+30 American Indian or 
+Alaska Native 
+Respondents who reported being American Indian or Alaska Native (MRACASC1=30) 
+40 Asian Respondents who reported being Asian (MRACASC1=40) 
+41 Asian Indian Respondents who reported being Asian Indian (MRACASC1=41) 
+42 Chinese Respondents who reported being Chinese (MRACASC1=42) 
+43 Filipino Respondents who reported being Filipino (MRACASC1=43) 
+44 Japanese Respondents who reported being Japanese (MRACASC1=44) 
+45 Korean Respondents who reported being Korean (MRACASC1=45) 
+46 Vietnamese Respondents who reported being Vietnamese (MRACASC1=46) 
+47 Other Asian Respondents who reported being Other Asian (MRACASC1=47) 
+50 Pacific Islander Respondents who reported being Pacific Islander (MRACASC1=50) 
+51 Native Hawaiian Respondents who reported being Native Hawaiian (MRACASC1=51) 
+52 Guamanian or Chamorro Respondents who reported being Guamanian or Chamorro (MRACASC1=52) 
+53 Samoan Respondents who reported being Samoan (MRACASC1=53) 
+54 Other Pacific Islander Respondents who reported being Other Pacific Islander (MRACASC1=54) 
+60 Other Respondents who reported being Other (MRACASC1=60) 
+70 Multiple responses Respondents who reported being of multiple races/ethnicities (MRACASC1>99) 
+77 Don’t know/Not Sure Respondents who reported they didn´t know their race (MRACASC1=77) 
+99 Refused Respondents who refused to answer what race/ethnicity they were (MRACASC1=99) 
+SAS Code: IF MRACASC1 GT 99 THEN _M_RACE = 70; 
+ELSE IF MRACASC1 EQ 99 THEN _M_RACE = 99; 
+ELSE IF MRACASC1 EQ 77 THEN _M_RACE = 77; 
+ELSE IF 10 LE MRACASC1 LE 60 THEN _M_RACE=MRACASC1; 
+Page 16 of 41 June 17, 2022 
+  
+ 
+ 
+    
+   
+  
+   
+    
+ 
+  
+ 
+  
+ 
+ 
+ 
+   
+  
+   
+ 
+    
+ 
+ 
+ 
+ 
+ 
+ 
+Calculated Variables in the 2021 BRFSS Data File (continued) 
+Section 9: Demographics 
+_HISPANC    Calculated variable for Hispanic, Latino/a, or Spanish origin calculated variable. 
+_HISPANC is derived from HISPANC3 
+1 Hispanic, Latino/a, or 
+Spanish origin 
+Respondents who reported being of Hispanic, Latino/a, or Spanish origin 
+(HISPANC3=1,2,3,4 or HISPANC3 > 9) 
+2 Not of Hispanic, Latino/ 
+a, or Spanish origin 
+Respondents who reported they were not of Hispanic, Latino/a, or Spanish origin 
+(HISPANC3=5) 
+9 Don´t Know, Refused, or 
+Missing 
+Respondents who refused to report if they were of Hispanic, Latino/a, or Spanish origin 
+(HISPANC3=7) 
+. Not asked or Missing Respondents who reported they did not know if they were of Hispanic, Latino/a, or Spanish 
+origin (HISPANC3=9) 
+SAS Code: HISPNUM=INPUT(HISPANC3,4.0); 
+IF HISPNUM in (5,58) THEN _HISPANC=2; 
+ELSE IF HISPNUM in (7,9,.) THEN _HISPANC=9; 
+ELSE _HISPANC=1; 
+Page 17 of 41 June 17, 2022 
+  
+ 
+ 
+    
+   
+            
+     
+       
+ 
+    
+  
+   
+ 
+ 
+ 
+  
+    
+  
+    
+ 
+ 
+ 
+  
+    
+ 
+ 
+  
+     
+ 
+     
+    
+ 
+   
+  
+ 
+    
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Calculated Variables in the 2021 BRFSS Data File (continued) 
+Section 9: Demographics 
+_RACE Calculated variable for race ethnicity categories. _RACE is derived from _MRACE1 and _HISPANC. 
+All respondents who reported they are of Hispanic or Latino origin are coded as Hispanic. 
+1 White only, non-Hispanic Respondents who reported they are white and not of Hispanic origin. 
+(_MRACE1=1 and _HISPANC=2) 
+2 Black only, non-Hispanic Respondents who reported they are black and not of Hispanic origin. 
+(_MRACE1=2 and _HISPANC=2) 
+3 American Indian or 
+Alaskan Native only, 
+Non-Hispanic 
+Respondents who reported they are American Indian or Alaska Native and not of Hispanic 
+origin. (_MRACE1=3 and _HISPANC=2) 
+4 Asian only, non-Hispanic Respondents who reported they are Asian and not of Hispanic origin. 
+(_MRACE1=4 and _HISPANC=2) 
+5 Native Hawaiian or other 
+Pacific Islander only, 
+Non-Hispanic 
+Respondents who reported they are Native Hawaiian or Pacific Islander and not of Hispanic 
+origin. (_MRACE1=5 and _HISPANC=2) 
+6 Other race only, 
+non-Hispanic 
+Respondents who reported they are of some other race group not listed in the question 
+responses and are not of Hispanic origin. (_MRACE1=6 and _HISPANC=2) 
+7 Multiracial, non-Hispanic Respondents who reported they are of more than one race group and are not of Hispanic origin. 
+(_MRACE1=7 and _HISPANC=2) 
+8 Hispanic Respondents who reported they are of Hispanic origin. ( _HISPANC=1) 
+9 Don’t know/Not sure/ 
+Refused 
+Respondents who reported they did not know or refused to give their race and are not of 
+Hispanic origin or did not know or refused to answer if they are of Hispanic origin. 
+(_MRACE1 =77, 99 and _HISPANC=2 or _HISPANC=7, 9) 
+SAS Code: IF _HISPANC=9 OR (_MRACE1 IN(77,99) AND HISPANC3 EQ 2) THEN DO; 
+_RACE = 9 ; 
+END; 
+ELSE IF _HISPANC =2 THEN DO; 
+IF _MRACE1 = 1 THEN _RACE = 1 ; 
+ELSE IF _MRACE1 = 2 THEN _RACE = 2 ; 
+ELSE IF _MRACE1 = 3 THEN _RACE = 3 ; 
+ELSE IF _MRACE1 = 4 THEN _RACE = 4 ; 
+ELSE IF _MRACE1 = 5 THEN _RACE = 5 ; 
+ELSE IF _MRACE1 = 6 THEN _RACE = 6 ; 
+ELSE IF _MRACE1 = 7 THEN _RACE = 7 ; 
+END; 
+ELSE IF _HISPANC=1 THEN DO; 
+_RACE = 8 ; 
+END; 
+Page 18 of 41 June 17, 2022 
+  
+ 
+ 
+    
+   
+        
+      
+        
+    
+ 
+  
+  
+    
+  
+  
+ 
+ 
+ 
+   
+        
+   
+ 
+   
+     
+    
+ 
+ 
+  
+   
+ 
+  
+    
+    
+ 
+  
+  
+    
+  
+  
+  
+  
+  
+ 
+ 
+ 
+Calculated Variables in the 2021 BRFSS Data File (continued) 
+Section 9: Demographics 
+_RACEG21 Calculated variable for white Non-Hispanic race group. _RACEG21 is derived from _RACE. 
+1 Non-Hispanic White Respondents who reported they are white and not of Hispanic origin. (_RACE=1) 
+2 Non-White or Hispanic Respondents who reported they are non-white or of Hispanic origin. (_RACE=2, 3, 4, 5, 6, 7, 8) 
+9 Don’t know/Not sure/ 
+Refused 
+Respondents who reported they did not know or refused to give their race and are not of 
+Hispanic origin or did not know or refused to answer if they are of Hispanic origin. (_RACE=9) 
+SAS Code: IF _RACE = 1 THEN _RACEG21 = 1; 
+ELSE IF _RACE IN (2,3,4,5,6,7,8) THEN _RACEG21 = 2; 
+ELSE IF _RACE=9 THEN _RACEG21 = 9; 
+Section 9: Demographics 
+_RACEGR3 Calculated variable for five-level race ethnicity category. _RACEGR3 is derived from _RACE. 
+1 White only, 
+Non-Hispanic 
+Respondents who reported they are white and not of Hispanic origin. (_RACE=1) 
+2 Black only, Non-Hispanic Respondents who reported they are black and not of Hispanic origin. (_RACE=2) 
+3 Other race only, 
+Non-Hispanic 
+Respondents who reported they are not white and not black and not of Hispanic origin. 
+(_RACE=3, 4, 5, 6) 
+4 Multiracial, 
+Non-Hispanic 
+Respondents who reported being multiracial but not of Hispanic origin. (_RACE=7) 
+5 Hispanic Respondents who reported they are of Hispanic origin. (_RACE=8) 
+9 Don’t know/Not sure/ 
+Refused 
+Respondents who reported they did not know or refused to give their race and are not of 
+Hispanic origin or did not know or refused to answer if they are of Hispanic origin. (_RACE=9) 
+SAS Code: IF _RACE=1 THEN _RACEGR3=1; 
+ELSE IF _RACE=2 THEN _RACEGR3=2; 
+ELSE IF 3 LE _RACE LE 6 THEN _RACEGR3=3; 
+ELSE IF _RACE=7 THEN _RACEGR3=4; 
+ELSE IF _RACE=8 THEN _RACEGR3=5; 
+ELSE IF _RACE=9 THEN _RACEGR3=9; 
+Page 19 of 41 June 17, 2022 
+  
+ 
+ 
+    
+   
+      
+  
+       
+  
+   
+  
+   
+ 
+ 
+ 
+   
+ 
+    
+   
+    
+ 
+ 
+ 
+    
+ 
+ 
+  
+  
+     
+ 
+     
+ 
+    
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+   
+   
+      
+     
+    
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Calculated Variables in the 2021 BRFSS Data File (continued) 
+Section 9: Demographics 
+_RACEPRV Calculated variable for computed race groups used for internet prevalence tables 
+. _RACEPRV is derived from _RACE and _IMPRACE 
+1 White only, non-Hispanic Respondents who reported they are white and not of Hispanic origin or were imputed to be 
+white and not of Hispanic origin. (_RACE=1 or _RACE=9 and _IMPRACE=1) 
+2 Black only, non-Hispanic Respondents who reported they are black and not of Hispanic origin or were imputed to be 
+black and not of Hispanic origin. (_RACE=2 or _RACE=9 and _IMPRACE=2) 
+3 American Indian or 
+Alaskan Native only, 
+Non-Hispanic 
+Respondents who reported they are American Indian or Alaska Native and not of Hispanic 
+origin or were imputed to be American Indian or Alaska Native and not of Hispanic origin. 
+(_RACE=3 or _RACE=9 and _IMPRACE=4) 
+4 Asian only, non-Hispanic Respondents who reported they are Asian and not of Hispanic origin or were imputed to be 
+Asian and not of Hispanic origin. (_RACE=4 or _RACE=9 and _IMPRACE=3) 
+5 Native Hawaiian or other 
+Pacific Islander only, 
+Non-Hispanic 
+Respondents who reported they are Native Hawaiian or Pacific Islander and not of Hispanic 
+origin. (_RACE=5) 
+6 Other race only, 
+non-Hispanic 
+Respondents who reported they are of some other race group not listed in the question 
+responses and are not of Hispanic origin or were imputed to be some other race group and not 
+of Hispanic origin. (_RACE=6 or _RACE=9 and _IMPRACE=6) 
+7 Multiracial, non-Hispanic Respondents who reported they are of more than one race group and are not of Hispanic origin. 
+(_RACE=7) 
+8 Hispanic Respondents who reported they are of Hispanic origin or were imputed to be of Hispanic origin. 
+(_RACE=8 or _RACE=9 and _IMPRACE==5) 
+SAS Code: IF _RACE < 9 THEN _RACEPRV=_RACE; 
+IF _RACE=9 THEN DO; 
+IF _IMPRACE IN (1,2,6) THEN _RACEPRV=_IMPRACE; 
+ELSE IF _IMPRACE=3 THEN _RACEPRV=4; 
+ELSE IF _IMPRACE=4 THEN _RACEPRV=3; 
+ELSE IF _IMPRACE=5 THEN _RACEPRV=8; 
+END; 
+Section 9: Demographics 
+_SEX        Calculated variable for calculated sex variable. _SEX is derived from BIRTHSEX and SEXVAR 
+1 Male Male respondent (BIRTHSEX=1 or BIRTHSEX notin (1,2) and SEXVAR=1) 
+2 Female Female respondent (BIRTHSEX=2 or BIRTHSEX notin (1,2) and SEXVAR=2) 
+SAS Code: IF BIRTHSEX IN (1,2) THEN DO; 
+_SEX=BIRTHSEX; 
+END; 
+ELSE DO; 
+_SEX=SEXVAR; 
+END; 
+Page 20 of 41 June 17, 2022 
+  
+ 
+ 
+    
+   
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+     
+   
+ 
+  
+ 
+    
+  
+  
+  
+  
+ 
+  
+  
+  
+  
+ 
+  
+  
+  
+ 
+ 
+ 
+Calculated Variables in the 2021 BRFSS Data File (continued) 
+Section 9: Demographics 
+_AGEG5YR    Calculated variable for fourteen-level age category. _AGEG5YR is derived from AGE. 
+1 Age 18 to 24 Respondents with reported age between 18 and 24 years (18 </= AGE </= 24) 
+2 Age 25 to 29 Respondents with reported age between 25 and 29 years (25 </= AGE </= 29) 
+3 Age 30 to 34 Respondents with reported age between 30 and 34 years (30 </= AGE </= 34) 
+4 Age 35 to 39 Respondents with reported age between 35 and 39 years (35 </= AGE </= 39) 
+5 Age 40 to 44 Respondents with reported age between 40 and 44 years (40 </= AGE </= 44) 
+6 Age 45 to 49 Respondents with reported age between 45 and 49 years (45 </= AGE </= 49) 
+7 Age 50 to 54 Respondents with reported age between 50 and 54 years (50 </= AGE </= 54) 
+8 Age 55 to 59 Respondents with reported age between 55 and 59 years (55 </= AGE </= 59) 
+9 Age 60 to 64 Respondents with reported age between 60 and 64 years (60 </= AGE </= 64) 
+10 Age 65 to 69 Respondents with reported age between 65 and 69 years (65 </= AGE </= 69) 
+11 Age 70 to 74 Respondents with reported age between 70 and 74 years (70 </= AGE </= 74) 
+12 Age 75 to 79 Respondents with reported age between 75 and 79 years (75 </= AGE </= 79) 
+13 Age 80 or older Respondents with reported age between 80 and 99 years (80 </= AGE </= 99) 
+14 Don’t know/Refused/ 
+Missing 
+Respondents who reported they didn´t know, were not sure, refused to report or had missing 
+responses for their age. (AGE=7, 9, missing) 
+SAS Code: IF 18 LE AGE LE 24 THEN _AGEG5YR = 1; 
+ELSE IF 25 LE AGE LE 29 THEN _AGEG5YR = 2; 
+ELSE IF 30 LE AGE LE 34 THEN _AGEG5YR = 3; 
+ELSE IF 35 LE AGE LE 39 THEN _AGEG5YR = 4; 
+ELSE IF 40 LE AGE LE 44 THEN _AGEG5YR = 5; 
+ELSE IF 45 LE AGE LE 49 THEN _AGEG5YR = 6; 
+ELSE IF 50 LE AGE LE 54 THEN _AGEG5YR = 7; 
+ELSE IF 55 LE AGE LE 59 THEN _AGEG5YR = 8; 
+ELSE IF 60 LE AGE LE 64 THEN _AGEG5YR = 9; 
+ELSE IF 65 LE AGE LE 69 THEN _AGEG5YR = 10; 
+ELSE IF 70 LE AGE LE 74 THEN _AGEG5YR = 11; 
+ELSE IF 75 LE AGE LE 79 THEN _AGEG5YR = 12; 
+ELSE IF 80 LE AGE LE 99 THEN _AGEG5YR = 13; 
+ELSE _AGEG5YR = 14; 
+Page 21 of 41 June 17, 2022 
+  
+ 
+ 
+    
+   
+   
+    
+     
+   
+ 
+  
+  
+    
+  
+  
+ 
+ 
+ 
+   
+   
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+    
+ 
+ 
+ 
+ 
+Calculated Variables in the 2021 BRFSS Data File (continued) 
+Section 9: Demographics 
+_AGE65YR    Calculated variable for two-level age category. _AGE65YR is derived from AGE. 
+1 Age 18 to 64 Respondents with reported ages 18–64. (18 </= AGE </=64) 
+2 Age 65 or older Respondents with reported ages 65–99. (65 >/= AGE >/= 99) 
+3 Don’t know/Refused/ 
+Missing 
+Respondents who reported they didn´t know, were not sure, refused, or had a missing value for 
+AGE. (AGE=7,9, or missing) 
+SAS Code: IF 18 LE AGE LE 64 THEN _AGE65YR=1; 
+ELSE IF 65 LE AGE LE 99 THEN _AGE65YR=2; 
+ELSE _AGE65YR = 3; 
+Section 9: Demographics 
+_AGE80      Calculated variable for imputed age value collapsed above 80. _AGE80 is derived from _IMPAGE. 
+18–24 Imputed Age 18 to 24 Respondents with reported Imputed Age between 18 and 24 years (18 < /= Imputed Age </= 24) 
+25–29 Imputed Age 25 to 29 Respondents with reported Imputed Age between 25 and 29 years (25 < /= Imputed Age </= 29) 
+30–34 Imputed Age 30 to 34 Respondents with reported Imputed Age between 30 and 34 years (30 < /= Imputed Age </= 34) 
+35–39 Imputed Age 35 to 39 Respondents with reported Imputed Age between 35 and 39 years (35 < /= Imputed Age </= 39) 
+40–44 Imputed Age 40 to 44 Respondents with reported Imputed Age between 40 and 44 years (40 < /= Imputed Age </= 44) 
+45–49 Imputed Age 45 to 49 Respondents with reported Imputed Age between 45 and 49 years (45 < /= Imputed Age </= 49) 
+50–54 Imputed Age 50 to 54 Respondents with reported Imputed Age between 50 and 54 years (50 < /= Imputed Age </= 54) 
+55–59 Imputed Age 55 to 59 Respondents with reported Imputed Age between 55 and 59 years (55 < /= Imputed Age </= 59) 
+60–64 Imputed Age 60 to 64 Respondents with reported Imputed Age between 60 and 64 years (60 < /= Imputed Age </= 64) 
+65–69 Imputed Age 65 to 69 Respondents with reported Imputed Age between 65 and 69 years (65 < /= Imputed Age </= 69) 
+70–74 Imputed Age 70 to 74 Respondents with reported Imputed Age between 70 and 74 years (70 < /= Imputed Age </= 74) 
+75–79 Imputed Age 75 to 79 Respondents with reported Imputed Age between 75 and 79 years (75 < /= Imputed Age </= 79) 
+80–99 Imputed Age 80 or older Respondents with reported Imputed Age between 80 and 99 years (80 < /= Imputed Age </= 99) 
+SAS Code: IF 18 LE _IMPAGE LE 80 THEN _AGE80=_IMPAGE; 
+ELSE IF _IMPAGE GE 80 THEN _AGE80=80; 
+Page 22 of 41 June 17, 2022 
+  
+ 
+ 
+    
+   
+         
+  
+     
+     
+     
+     
+     
+     
+    
+  
+  
+  
+  
+  
+ 
+ 
+ 
+   
+            
+   
+    
+    
+ 
+  
+  
+    
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+   
+              
+   
+  
+    
+  
+  
+       
+    
+ 
+  
+  
+    
+ 
+ 
+ 
+ 
+Calculated Variables in the 2021 BRFSS Data File (continued) 
+Section 9: Demographics 
+_AGE_G Calculated variable for six-level imputed age category. 
+_AGE_G is derived from _IMPAGE (imputed age). 
+1 Age 18 to 24 Respondents with imputed ages between 18–24 years of age. (18 </= _IMPAGE </= 24) 
+2 Age 25 to 34 Respondents with imputed ages between 25–34 years of age. (25 </= _IMPAGE </= 34) 
+3 Age 35 to 44 Respondents with imputed ages between 35–44 years of age. (35 </= _IMPAGE </= 44) 
+4 Age 45 to 54 Respondents with imputed ages between 45–54 years of age. (45 </= _IMPAGE </= 54) 
+5 Age 55 to 64 Respondents with imputed ages between 55–64 years of age. (55 </= _IMPAGE </= 64) 
+6 Age 65 or older Respondents with imputed ages between 65–99 years of age. (_IMPAGE =/> 65) 
+SAS Code: IF (18<=_IMPAGE<=24) THEN _AGE_G = 1; 
+ELSE IF (25<=_IMPAGE<=34) THEN _AGE_G = 2; 
+ELSE IF (35<=_IMPAGE<=44) THEN _AGE_G = 3; 
+ELSE IF (45<=_IMPAGE<=54) THEN _AGE_G = 4; 
+ELSE IF (55<=_IMPAGE<=64) THEN _AGE_G = 5; 
+ELSE IF (_IMPAGE >= 65) THEN _AGE_G = 6; 
+Section 9: Demographics 
+HTIN4 Calculated variable for reported height in inches. HTIN4 is derived from HEIGHT3. HTIN4 is 
+calculated by adding the foot portion of HEIGHT3 multiplied by 12, to the inch portion. 
+36–95 Height in inches Respondents calculated height in inches. (HTIN4=(height in feet x 12) + height in inches) 
+. Don’t know/Refused/ 
+Not asked or Missing 
+Respondents who reported they didn´t know, were not sure, refused or had missing responses 
+for their height. 
+SAS Code: IF 300<=HEIGHT3<=311 THEN HTIN4=((HEIGHT3-300)+36); 
+ELSE IF 400<=HEIGHT3<=411 THEN HTIN4=((HEIGHT3-400)+48); 
+ELSE IF 500<=HEIGHT3<=511 THEN HTIN4=((HEIGHT3-500)+60); 
+ELSE IF 600<=HEIGHT3<=611 THEN HTIN4=((HEIGHT3-600)+72); 
+ELSE IF 700<=HEIGHT3<=711 THEN HTIN4=((HEIGHT3-700)+84); 
+Section 9: Demographics 
+HTM4 Calculated variable for reported height in meters. HTM4 is derived from the variable HTIN4 by 
+multiplying HTIN4 by 2.54 cm per in and dividing by 100 cm per meter. HTM4 is derived from 
+HEIGHT2 metric values by dividing by 100. 
+91–244 Height in meters 
+[2 implied decimal places] 
+Respondents reported or calculated height in meters. 
+(HTM4=HTIN4 x 0.0254 or HTM4 = (HEIGHT3 - 9000) ÷ 100) 
+. Don’t know/Refused/ 
+Not asked or Missing 
+Respondents who reported they didn´t know, were not sure, refused or had missing responses 
+for their height. 
+SAS Code: IF 300 <= HEIGHT3 <= 711 THEN HTM4=HTIN4*0.0254; 
+ELSE IF 9091 <= HEIGHT3 < 9244 THEN HTM4=(HEIGHT3-9000)/100; 
+Page 23 of 41 June 17, 2022 
+  
+ 
+ 
+    
+   
+  
+ 
+ 
+ 
+   
+  
+ 
+    
+ 
+   
+ 
+    
+  
+  
+  
+ 
+ 
+ 
+ 
+   
+      
+ 
+      
+ 
+   
+ 
+ 
+  
+   
+ 
+  
+ 
+  
+  
+ 
+ 
+ 
+ 
+   
+        
+   
+    
+     
+  
+     
+      
+   
+ 
+  
+    
+  
+  
+ 
+ 
+ 
+Calculated Variables in the 2021 BRFSS Data File (continued) 
+Section 9: Demographics 
+WTKG3       Calculated variable for reported weight in kilograms. WTKG3 is derived from WEIGHT2 by 
+multiplying WEIGHT2 by 0.4535924 kg per lb. 
+2300 -
+29500 
+Weight in kilograms 
+[2 implied decimal places] 
+Respondents reported or calculated weight in kilograms. 
+. Don’t know/Refused/ 
+Not asked or Missing 
+Respondents who reported they didn´t know, were not sure, or refused or had missing responses 
+for their weight. 
+SAS Code: ** CONVERSION FACTOR = 0.4535924 kg/lb **; 
+IF WEIGHT2 NOT IN (777,999,7777,9999,.) THEN DO; 
+IF 0050 LE WEIGHT2 < 0650 THEN WTKG3=WEIGHT2*0.4535924; 
+ELSE IF 9023 LE WEIGHT2 < 9295 THEN WTKG3=WEIGHT2-9000; 
+END; 
+Section 9: Demographics 
+_BMI5       Calculated variable for body mass index (bmi). _BMI5 is derived from WTKG3 and HTM4. It is 
+calculated by dividing WTKG3 by HTM4². 
+1 - 9999 1 or greater Respondents calculated body mass index (BMI) {units=kilograms per meter squared}. 
+(_BMI5 = WTKG3 / (HTM4xHTM4)) 
+. Don’t know/Refused/ 
+Missing 
+Respondents who had a missing value for their height in meters or weight in kilograms. 
+(WTKG3=missing or HTM4=missing or _BMI5<12.00 or _BMI5>=100 or PREGNANT=1) 
+SAS Code: IF (WTKG3 NOTIN (.)) AND (HTM4 NOTIN (.)) THEN _BMI5=WTKG3/(HTM4 ** 
+2); 
+ELSE _BMI5=.; 
+IF _BMI5 NE . THEN _BMI5=ROUND(_BMI5,.01); 
+IF _BMI5 > 99.99 THEN _BMI5=.; 
+IF _BMI5 < 12.00 THEN _BMI5=.; 
+IF PREGNANT=1 THEN _BMI5=.; 
+Section 9: Demographics 
+_BMI5CAT Calculated variable for four-categories of body mass index (BMI). 
+_BMI5CAT is derived from _BMI5. 
+1 Underweight Respondents classified as underweight based on body mass index. (_BMI5 < 18.50) 
+2 Normal Weight Respondents classified as normal weight based on body mass index. 
+(18.50 </= _BMI5 < 25.00) 
+3 Overweight Respondents classified as overweight based on body mass index. (25.00 < /= _BMI5 < 30.00) 
+4 Obese Respondents classified as obese based on body mass index. (30.00 </= _BMI5 < 99.99) 
+. Don’t know/Refused/ 
+Missing 
+Respondents with an unknown, refused, or missing value for body mass index. (_BMI5=.) 
+SAS Code: IF (0.00 LE _BMI5 < 18.50) THEN _BMI5CAT=1; 
+ELSE IF (18.50 LE _BMI5 < 25.00) THEN _BMI5CAT=2; 
+ELSE IF (25.00 LE _BMI5 < 30.00) THEN _BMI5CAT=3; 
+ELSE IF _BMI5 GE 30.00 THEN _BMI5CAT=4; 
+Page 24 of 41 June 17, 2022 
+ 
+ 
+ 
+    
+ 
+   
+    
+ 
+      
+   
+    
+   
+   
+ 
+  
+ 
+    
+  
+  
+ 
+ 
+  
+  
+  
+  
+ 
+ 
+ 
+   
+         
+    
+    
+  
+ 
+  
+  
+ 
+ 
+  
+ 
+ 
+   
+ 
+  
+    
+ 
+  
+ 
+    
+  
+  
+  
+  
+ 
+  
+  
+ 
+ 
+ 
+Calculated Variables in the 2021 Behavioral Risk Factor Surveillance System Data File (continued) 
+Section 9: Demographics 
+_RFBMI5     Calculated variable for adults who have a body mass index greater than 25.00 (overweight or obese). 
+_RFBMI5 is derived from _BMI5. 
+1 No Respondents not classified as overweight or obese based on body mass index. 
+(12 </= _BMI5 < 25.00) 
+2 Yes Respondents classified as overweight or obese based on body mass index. 
+(25.00 </= _BMI5 </= 99.99) 
+9 Don’t know/Refused/ 
+Missing 
+Respondents with an unknown, refused, or missing value for body mass index. 
+(_BMI5=missing) 
+SAS Code: IF (12.00 LE _BMI5 < 25.00) THEN _RFBMI5=1; 
+ELSE IF (25.00 <= _BMI5 < 99.99) THEN _RFBMI5=2; 
+ELSE _RFBMI5=9; 
+** Round off HTM4, WTKG3 and _BMI5 to 2 decimal places and remove 
+the decimal **; 
+HTIN4 = round(HTIN4,1); 
+HTM4 = round((HTM4*100),1); 
+WTKG3 = round((WTKG3*100),1); 
+IF _BMI5 NE . THEN _BMI5 = ROUND((_BMI5*100),1); 
+Section 9: Demographics 
+_CHLDCNT Calculated variable for number of children in household. _CHLDCNT is derived from CHILDREN. 
+1 No children in household Respondents who reported having no children. (CHILDREN=88) 
+2 One child in household Respondents who reported having one child. (CHILDREN=1) 
+3 Two children in 
+household 
+Respondents who reported having two children. (CHILDREN=2) 
+4 Three children in 
+household 
+Respondents who reported having three children. (CHILDREN=3) 
+5 Four children in 
+household 
+Respondents who reported having four children. (CHILDREN=4) 
+6 Five or more children in 
+household 
+Respondents who reported having five or more children. (5 </= CHILDREN < 87) 
+9 Don’t know/Not sure/ 
+Missing 
+Respondents who reported they didn´t know, were not sure, refused or had a missing value for 
+CHILDREN. (CHILDREN=99) 
+SAS Code: IF CHILDREN = 88 THEN _CHLDCNT = 1; 
+ELSE IF CHILDREN = 01 THEN _CHLDCNT = 2; 
+ELSE IF CHILDREN = 02 THEN _CHLDCNT = 3; 
+ELSE IF CHILDREN = 03 THEN _CHLDCNT = 4; 
+ELSE IF CHILDREN = 04 THEN _CHLDCNT = 5; 
+ELSE IF 05 <= CHILDREN < 88 THEN _CHLDCNT = 6; 
+ELSE IF CHILDREN = 99 THEN _CHLDCNT = 9; 
+ELSE IF CHILDREN = . THEN _CHLDCNT = 9; 
+Page 25 of 41 June 17, 2022 
+  
+ 
+ 
+    
+   
+         
+   
+ 
+ 
+    
+   
+ 
+ 
+   
+ 
+  
+    
+ 
+  
+ 
+    
+  
+  
+  
+  
+ 
+ 
+ 
+Calculated Variables in the 2021 BRFSS Data File (continued) 
+Section 9: Demographics 
+_EDUCAG Calculated variable for level of education completed. _EDUCAG is derived from EDUCA. 
+1 Did not graduate High 
+School 
+Respondents who reported they did not graduate high school. (EDUCA=1,2,3) 
+2 Graduated High School Respondents who reported they graduated high school. (EDUCA=4) 
+3 Attended College or 
+Technical School 
+Respondents who reported they attended college or technical school. (EDUCA=5) 
+4 Graduated from College 
+or Technical School 
+Respondents who reported they graduated from college or technical school. (EDUCA=6) 
+9 Don’t know/Not sure/ 
+Missing 
+Respondents who reported they didn´t know, were not sure, refused, or had a missing value for 
+EDUCA. (EDUCA=9, missing) 
+SAS Code: IF EDUCA IN (1,2,3) THEN _EDUCAG = 1; 
+ELSE IF EDUCA IN (4) THEN _EDUCAG = 2; 
+ELSE IF EDUCA IN (5) THEN _EDUCAG = 3; 
+ELSE IF EDUCA IN (6) THEN _EDUCAG = 4; 
+ELSE IF EDUCA IN (.,9) THEN _EDUCAG = 9; 
+Page 26 of 41 June 17, 2022 
+  
+ 
+ 
+    
+   
+       
+    
+  
+ 
+  
+  
+ 
+  
+  
+ 
+  
+  
+ 
+ 
+  
+ 
+  
+     
+    
+ 
+    
+ 
+    
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+        
+ 
+ 
+Calculated Variables in the 2021 BRFSS Data File (continued) 
+Section 9: Demographics 
+_INCOMG1 Calculated variable for income categories. _INCOMG1 is derived from INCOME3. 
+1 Less than $15,000 Respondents whose reported income is less than $15,000. (INCOME3=1,2) 
+2 $15,000 to less than 
+$25,000 
+Respondents whose reported income is $15,000 to less than $25,000. (INCOME3=3,4) 
+3 $25,000 to less than 
+$35,000 
+Respondents whose reported income is $25,000 to less than $35,000. (INCOME3=5) 
+4 $35,000 to less than 
+$50,000 
+Respondents whose reported income is $35,000 to less than $50,000. (INCOME3=6) 
+5 $50,000 to less than 
+$100,000 
+Respondents whose reported income is $50,000 to less than $100,000. (INCOME3=7,8) 
+6 $100,000 to less than 
+$200,000 
+Respondents whose reported income is $100,000 to less than $200,000. (INCOME3=9,10) 
+7 $200,000 or more Respondents whose reported income is $200,000 or more. (INCOME3=11) 
+9 Don’t know/Not sure/ 
+Missing 
+Respondents who refused to answer, didn´t know or had a missing value for INCOME3. 
+(INCOME3=77, 99, or missing) 
+SAS Code: IF INCOME3 IN (1,2) THEN _INCOMG1 = 1; 
+ELSE IF INCOME3 IN (3,4) THEN _INCOMG1 = 2; 
+ELSE IF INCOME3 IN (5) THEN _INCOMG1 = 3; 
+ELSE IF INCOME3 IN (6) THEN _INCOMG1 = 4; 
+ELSE IF INCOME3 IN (7,8) THEN _INCOMG1 = 5; 
+ELSE IF INCOME3 IN (9,10) THEN _INCOMG1 = 6; 
+ELSE IF INCOME3 IN (11) THEN _INCOMG1 = 7; 
+ELSE IF INCOME3 IN (77,99,.) THEN _INCOMG1 = 9; 
+ELSE IF INCOME3 IN (11) THEN _INCOMG1 = 7; 
+ELSE IF INCOME3 IN (77,99,.) THEN _INCOMG1 = 9; 
+Section 10: Disability 
+There are no calculated variables for Section 10. 
+Page 27 of 41 June 17, 2022 
+  
+ 
+ 
+    
+    
+   
+  
+   
+  
+ 
+ 
+   
+ 
+ 
+  
+   
+ 
+     
+ 
+   
+ 
+ 
+ 
+ 
+ 
+    
+  
+  
+  
+  
+  
+  
+  
+ 
+ 
+ 
+    
+       
+     
+ 
+ 
+    
+ 
+   
+ 
+ 
+ 
+ 
+ 
+ 
+    
+  
+  
+ 
+ 
+ 
+Calculated Variables in the 2021 BRFSS Data File (continued) 
+Section 11: Tobacco Use 
+_SMOKER3    Calculated variable for four-level smoker status: everyday smoker, someday smoker, former smoker, 
+non-smoker. _SMOKER3 is derived from SMOKE100 and SMOKDAY2. 
+1 Current smoker–now 
+smokes every day 
+Respondents who reported having smoked at least 100 cigarettes in their lifetime and now 
+smoke every day. (SMOKE100=1 and SMOKDAY2=1) 
+2 Current smoker–now 
+smokes some days 
+Respondents who reported having smoked at least 100 cigarettes in their lifetime and now 
+smoke some days. (SMOKE100=1 and SMOKDAY2=2) 
+3 Former smoker Respondents who reported having smoked at least 100 cigarettes in their lifetime and currently 
+do not smoke. (SMOKE100=1 and SMOKDAY2=3) 
+4 Never smoked Respondents who reported they had not smoked at least 100 cigarettes in their lifetime. 
+(SMOKE100=2) 
+9 Don’t know/Refused/ 
+Missing 
+Respondents who reported they didn’t know if they had smoked 100 cigarettes in their lifetime, 
+those who refused to answer if they had smoked 100 cigarettes in their lifetime, those who 
+didn’t know if they now smoked every day, some days or not at all, those who refused to 
+answer if they now smoked every day, some days or not at all, or those with missing responses. 
+(SMOKE100=7, 9, missing; or SMOKDAY2=7, 9, missing) 
+SAS Code: IF SMOKE100=2 THEN _SMOKER3=4; 
+ELSE IF SMOKE100=1 THEN DO; 
+IF SMOKDAY2=1 THEN _SMOKER3=1; 
+ELSE IF SMOKDAY2=2 THEN _SMOKER3=2; 
+ELSE IF SMOKDAY2 = 3 THEN _SMOKER3=3; 
+ELSE _SMOKER3=9; 
+END; 
+ELSE _SMOKER3=9; 
+Section 11: Tobacco Use 
+_RFSMOK3 Calculated variable for adults who are current smokers. _RFSMOK3 is derived from _SMOKER3. 
+1 No Respondents who reported they had not smoked at least 100 cigarettes in their lifetime, those 
+who reported having smoked 100 cigarettes in their lifetime but do not currently smoke. 
+(_SMOKER3=3, 4) 
+2 Yes Respondents who reported having smoked at least 100 cigarettes in their lifetime and currently 
+smoke. (_SMOKER3=1, 2) 
+9 Don’t know/Refused/ 
+Missing 
+Respondents who reported they did not know if they had smoked 100 cigarettes in their 
+lifetime, those who refused to answer if they had smoked 100 cigarettes in their lifetime, those 
+who didn’t know if they now smoked every day, some days or not at all, those who refused to 
+answer if they now smoked every day, some days or not at all, or those with missing responses. 
+(_SMOKER3=9) 
+SAS Code: IF _SMOKER3 IN (1,2) THEN _RFSMOK3=2; 
+ELSE IF _SMOKER3 IN (3,4) THEN _RFSMOK3=1; 
+ELSE _RFSMOK3=9; 
+Page 28 of 41 June 17, 2022 
+  
+ 
+ 
+    
+    
+       
+  
+  
+ 
+   
+  
+ 
+       
+ 
+   
+ 
+ 
+  
+ 
+  
+    
+  
+  
+ 
+ 
+ 
+    
+       
+  
+      
+ 
+    
+ 
+      
+ 
+     
+ 
+    
+ 
+  
+ 
+ 
+ 
+ 
+Calculated Variables in the 2021 BRFSS Data File (continued) 
+Section 11: Tobacco Use 
+_CURECI1 Calculated variable for adults who are current e-cigarette users. 
+_CURECI1 is derived from ECIGNOW1. 
+1 Not currently using 
+E-cigarettes 
+Respondents who reported they had not used E-cigarettes in their lifetime, those who reported 
+having used E-cigarettes in their lifetime but do not currently use E-cigarettes. 
+(ECIGNOW1=3, 4) 
+2 Current E-cigarette user Respondents who reported having used E-cigarettes in their lifetime and currently use 
+E-cigarettes. (ECIGNOW1=1, 2) 
+9 Don’t know/Refused/ 
+Missing 
+Respondents who reported they did not know if they had used E-cigarettes in their lifetime, 
+those who refused to answer if they had used E-cigarettes in their lifetime, those who didn’t 
+know if they now used E-cigarettes every day, some days or not at all, those who refused to 
+answer if they now used E-cigarettes every day, some days or not at all, or those with missing 
+responses. (ECIGNOW1=7,9, or missing) 
+SAS Code: IF ECIGNOW1 IN (1,2) THEN _CURECI1=2; 
+ELSE IF ECIGNOW1 IN (3,4) THEN _CURECI1=1; 
+ELSE _CURECI1=9; 
+Section 12: Alcohol Consumption 
+DRNKANY5 Calculated variable for adults who reported having had at least one drink of alcohol in the past 30 
+days. DRNKANY5 is derived from AKCDAY5 
+1 Yes Respondents who reported drinking at least one alcoholic beverage in the past 30 days. 
+(1 </= ALCDAY5 </= 231) 
+2 No Respondents who reported drinking no alcoholic beverages in the past 30 days. 
+(ALCDAY5=888) 
+7 Don’t know/Not Sure Respondents who reported not knowing if they drank at least one alcoholic beverage in the past 
+30 days. (ALCDAY5=777) 
+9 Refused/Missing Respondents who refused to answer or had a missing value for drinking at least one alcoholic 
+beverage in the past 30 days. (ALCDAY5=999, Missing) 
+SAS Code: IF 1 <= ALCDAY5 < 231 THEN DRNKANY5=1; 
+ELSE IF ALCDAY5=888 THEN DRNKANY5=2; 
+ELSE IF ALCDAY5=777 THEN DRNKANY5=7; 
+ELSE DRNKANY5=9; 
+Page 29 of 41 June 17, 2022 
+  
+ 
+ 
+    
+    
+       
+    
+    
+ 
+ 
+      
+  
+    
+ 
+  
+ 
+ 
+    
+  
+  
+  
+ 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+    
+     
+   
+ 
+    
+   
+ 
+    
+  
+   
+ 
+  
+  
+  
+ 
+    
+  
+  
+  
+  
+ 
+   
+ 
+ 
+ 
+Calculated Variables in the 2021 BRFSS Data File (continued) 
+Section 12: Alcohol Consumption 
+DROCDY3_ Calculated variable for drink-occasions-per-day. DROCDY3_ is derived from ALCDAY5 by dividing 
+the ALCDAY5 variable by 7 days per week or 30 days per month. 
+0 No Drink-Occasions 
+per day 
+Respondents reported no occasions per day that they consumed alcohol. (ALCDAY5=888) 
+1 - 899 Drink-Occasions per day Respondents reported number of occasions per day that they consumed alcohol. 
+(ALCDAY5 not equal to 777, 888, 999, or missing) 
+900 Don’t know/Not Sure or 
+Refused/Missing 
+Respondents who reported they did not know how many days they had at least one drink of 
+alcohol, those who refused to answer how many days they had at least one drink of alcohol, 
+those with missing responses. (ALCDAY5=777, 999, or missing) 
+SAS Code: IF ALCDAY5 NOTIN (888,777,999,.) THEN DO; 
+IF 101 LE ALCDAY5 LE 107 THEN DROCDY3_=(ALCDAY5-100)/7; 
+ELSE IF 201 LE ALCDAY5 LE 230 THEN DROCDY3_=(ALCDAY5-200)/30; 
+END; 
+ELSE IF ALCDAY5 EQ 888 THEN DROCDY3_=0; 
+ELSE DROCDY3_=9; 
+* DROCDY3_=round((DROCDY3_*100),1); 
+*This is done after all of the alcohol calculations but the code 
+is included here; 
+Section 12: Alcohol Consumption 
+_RFBING5 Calculated variable for binge drinkers (males having five or more drinks on one occasion, females 
+having four or more drinks on one occasion). _RFBING5 is derived from DRNK3GE5 and 
+ALCDAY5. 
+1 No Respondents who reported they did not drink in the past 30 days, or those who reported that 
+they did drink alcohol in the past 30 days but did not report having five or more drinks of 
+alcohol on an occasion. (ALCDAY5<231 and DRNK3GE5=88; or ALCDAY5=888) 
+2 Yes Respondents who reported they did drink in the past 30 days and had five or more drinks on 
+one or more occasions in the past month. (ALCDAY5<231 and 1</=DRNK3GE5</=76) 
+9 Don’t know/Refused/ 
+Missing 
+Respondents who reported that they did not know if they had consumed five or more drinks of 
+alcohol on one occasion or refused to answer if they had consumed five or more drinks of 
+alcohol on one occasion or those with missing responses. (DRNK3GE5=77, 99, missing; or 
+ALCDAY5=777, 999, missing) 
+SAS Code: IF ALCDAY5 NOTIN (888) THEN DO; 
+IF 1 LE DRNK3GE5 LE 76 THEN _RFBING5=2; 
+ELSE IF DRNK3GE5 IN (.,77,99) THEN _RFBING5=9; 
+ELSE IF DRNK3GE5 IN (88) THEN _RFBING5=1; 
+END; 
+ELSE IF ALCDAY5 = 888 THEN _RFBING5=1; 
+ELSE _RFBING5=9; 
+Page 30 of 41 June 17, 2022 
+  
+ 
+ 
+    
+    
+       
+   
+   
+  
+       
+ 
+ 
+   
+ 
+   
+  
+ 
+    
+ 
+   
+ 
+    
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Calculated Variables in the 2021 BRFSS Data File (continued) 
+Section 12: Alcohol Consumption 
+_DRNKWK1 Calculated variable for calculated total number of alcoholic beverages consumed per week. 
+_DRNKWK1 is derived from DROCDY3_ and AVEDRNK3 by multiplying the total number of 
+drink occasions per day (DROCDY3_) by the average number of drinks per occasion (AVEDRNK3) 
+times seven days. 
+0 Did not drink Respondents who did not drink in the past month. (DROCDY3_=0 or AVEDRNK3=88) 
+1 -
+98999 
+Number of drinks per 
+week 
+Respondents reported number of alcoholic drinks in the past week. (0 < DROCDY3_ < 990) 
+99900 Don’t know/Not sure/ 
+Refused/ Missing 
+Respondents who refused to report the number of alcohol drinks consumed per day or 
+respondents who did not know the number of alcohol drinks consumed per day or those with 
+missing responses or respondents who refused to report the number drink occasions per day or 
+respondents who did not know the number of drink occasions per day or those with missing 
+responses. (AVEDRNK3=.,77,99 or DROCDY3_=900) 
+SAS Code: IF DROCDY3_=0 THEN _DRNKWK1=0; 
+ELSE IF DROCDY3_=9 THEN _DRNKWK1=999; 
+ELSE IF AVEDRNK3 IN (.,77,99) THEN _DRNKWK1=999; 
+ELSE IF AVEDRNK3=88 THEN _DRNKWK1=0; 
+ELSE _DRNKWK1=AVEDRNK3*DROCDY3_*7; 
+* _DRNKWK1=ROUND((_DRNKWK1*100),1); 
+*This is done after all of the alcohol calculations but the code is 
+included here; 
+Page 31 of 41 June 17, 2022 
+  
+ 
+ 
+    
+    
+     
+     
+ 
+     
+ 
+ 
+ 
+     
+ 
+   
+ 
+   
+  
+    
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+  
+ 
+ 
+ 
+Calculated Variables in the 2021 BRFSS Data File (continued) 
+Section 12: Alcohol Consumption 
+_RFDRHV7 Calculated variable for heavy drinkers (adult men having more than 14 drinks per week and adult 
+women having more than 7 drinks per week). _RFDRHV7 is derived from _DRNKWK1, ALCDAY5, 
+and SEXVAR. 
+1 No Male Respondents who reported having 14 drinks per week or less, or Female Respondents 
+who reported having 7 drinks per week or less. ((SEXVAR=1 or BIRTHSEX=1) and 
+_DRNKWK1 </= 1400 or (SEXVAR=2 or BIRTHSEX=2) and _DRNKWK1 </= 700 or 
+ALCDAY5=888) 
+2 Yes Male Respondents who reported having more than 14 drinks per week, or Female Respondents 
+who reported having more than 7 drinks per week. ((SEXVAR=1 or BIRTHSEX=1) and 
+_DRNKWK1 > 1400 or (SEXVAR=2 or BIRTHSEX=2) and _DRNKWK1 > 700) 
+9 Don’t know/Refused/ 
+Missing 
+Respondents with don´t know, refused or missing responses for ALCDAY5 or _DRNKWK1. 
+(ALCDAY5=777, 999, or missing, or _DRNKWEK=99, or missing) 
+SAS Code: IF (SEXVAR=1 or BIRTHSEX=1) AND _DRNKWK1 NOTIN (999,.) THEN DO; 
+IF _DRNKWK1 GT 14 THEN _RFDRHV7=2; 
+ELSE IF _DRNKWK1 LE 14 THEN _RFDRHV7=1; 
+END; 
+ELSE IF (SEXVAR=2 or BIRTHSEX=2) AND _DRNKWK1 NOTIN (999,.) THEN DO; 
+IF _DRNKWK1 GT 7 THEN _RFDRHV7=2; 
+ELSE IF _DRNKWK1 LE 7 THEN _RFDRHV7=1; 
+END; 
+ELSE IF ALCDAY5 EQ 888 THEN _RFDRHV7=1; 
+ELSE _RFDRHV7=9; 
+** ROUND OFF TO NO DECIMAL PLACES ** MULTIPLY BY 100 AND THEN ROUND 
+OFF TO NO DECIMAL PLACES AND THEN REMOVE THE DECIMAL PLACES **; 
+DROCDY3_=round((DROCDY3_*100),1); 
+_DRNKWK1=ROUND((_DRNKWK1*100),1); 
+Page 32 of 41 June 17, 2022 
+  
+ 
+ 
+    
+   
+       
+    
+      
+ 
+     
+ 
+    
+ 
+ 
+  
+ 
+   
+     
+    
+  
+  
+  
+  
+  
+  
+ 
+ 
+ 
+   
+       
+  
+     
+  
+     
+  
+    
+ 
+ 
+   
+   
+  
+     
+    
+  
+  
+  
+  
+  
+  
+  
+ 
+ 
+ 
+Calculated Variables in the 2021 BRFSS Data File (continued) 
+Section 13: Immunization 
+_FLSHOT7 Calculated variable for adults aged 65+ who have had a flu shot within the past year. 
+_FLSHOT7 is derived from FLUSHOT7. 
+1 Yes Respondents aged 65 or older who reported having a flu shot within the past 12 months. 
+(AGE >= 65 and FLUSHOT7=1) 
+2 No Respondents aged 65 or older who reported not having had a flu shot within the past 12 months. 
+(AGE >= 65 and FLUSHOT7=2) 
+9 Don’t know/Not Sure or 
+Refused/ Missing 
+Respondents who did not know their age, those who refused to report their age, those who 
+didn’t know if they had a flu shot in the past 12 months, or those who refused to answer if they 
+had a flu shot in the past 12 months, or those with missing responses. 
+(AGE >= 65 and FLUSHOT7=7,9, or missing or AGE=7,9, or missing) 
+. Age Less Than 65 Respondents aged 18-64. (18 </= AGE </= 64) 
+SAS Code: IF AGE GE 65 THEN DO; 
+IF FLUSHOT7=1 THEN _FLSHOT7=1; 
+ELSE IF FLUSHOT7=2 THEN _FLSHOT7=2; 
+ELSE IF FLUSHOT7 IN (.,7,9) THEN _FLSHOT7=9; 
+END; 
+ELSE IF AGE IN (.,7,9) THEN _FLSHOT7=9; 
+ELSE _FLSHOT7=.; 
+Section 13: Immunization 
+_PNEUMO3 Calculated variable for adults aged 65+ who have ever had a pneumonia vaccination. 
+_PNEUMO3 is derived from PNEUVAC4. 
+1 Yes Respondents aged 65 or older who reported having a pneumonia shot. 
+(AGE >/= 65 and PNEUVAC4=1) 
+2 No Respondents aged 65 or older who reported not having had a pneumonia shot. 
+(AGE >/= 65 and PNEUVAC4=2) 
+9 Don’t know/Not Sure or 
+Refused/ Missing 
+Respondents who did not know their age, those who refused to report their age, those who did 
+not know if they ever had a pneumonia shot, those who refused to answer if they had a 
+pneumonia shot, or those with missing responses. 
+(AGE >= 65 and PNEUVAC3=7,9, or missing or AGE=7,9, or missing) 
+. Age Less than 65 Respondents aged 18–64. (18 </= AGE </= 64) 
+SAS Code: IF AGE GE 65 THEN DO; 
+IF PNEUVAC4=1 THEN _PNEUMO3=1; 
+ELSE IF PNEUVAC4=2 THEN _PNEUMO3=2; 
+ELSE IF PNEUVAC4 IN (.,7,9) THEN _PNEUMO3=9; 
+ELSE _PNEUMO3=.; 
+END; 
+ELSE IF AGE IN (.,7,9) THEN _PNEUMO3=9; 
+ELSE _PNEUMO3=.; 
+Page 33 of 41 June 17, 2022 
+  
+ 
+ 
+    
+   
+        
+    
+     
+  
+ 
+  
+ 
+    
+    
+  
+  
+  
+ 
+ 
+ 
+     
+       
+   
+     
+   
+    
+    
+ 
+   
+  
+  
+    
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Calculated Variables in the 2021 BRFSS Data File (continued) 
+Section 14: HIV/AIDS 
+_AIDTST4 Calculated variable for adults who have ever been tested for hiv. _AIDTST4 is derived from HIVTST7. 
+1 Yes Respondents who reported to having been tested for HIV. (HIVTST7=1) 
+2 No Respondents who did not report having been tested for HIV. (HIVTST7=2) 
+9 Don’t know/Not Sure/ 
+Refused 
+Respondents who reported they did not know if they had been tested for HIV, or those who 
+refused to answer if they had been tested for HIV. (HIVTST7=7,9) 
+. Not asked or missing Respondents with missing responses for HIVTST7. (HIVTST7=missing) 
+SAS Code: IF HIVTST7=1 THEN _AIDTST4=1; 
+ELSE IF HIVTST7=2 THEN _AIDTST4=2; 
+ELSE IF HIVTST7 IN (7,9) THEN _AIDTST4=9; 
+ELSE IF HIVTST7=. THEN _AIDTST4=.; 
+Section 15: Fruits & Vegetables 
+FTJUDA2_ Calculated variable for fruit juice intake in times per day. FTJUDA2_ converts the FRUITJU2 
+variable to a per day response. (Two implied decimal places) 
+0 - 9999 Times per day 
+(two implied decimal places) 
+Respondents reported intake of fruit juice per day (FRUITJU2 not equal to 777,999, or missing) 
+. Don’t know/Not Sure or 
+Refused/Missing 
+Respondents who reported they didn´t know the number of times fruit juice was consumed per 
+day, those who refused to answer, and those with missing responses 
+(FRUITJU2=777,999, or missing) 
+SAS Code: IF 100 < FRUITJU2 < 200 THEN FTJUDA2_=FRUITJU2-100; 
+ELSE IF 200 < FRUITJU2 < 300 THEN 
+FTJUDA2_=(ROUND((FRUITJU2-200)/7,0.01)); 
+ELSE IF 300 < FRUITJU2 < 400 THEN 
+FTJUDA2_=(ROUND((FRUITJU2-300)/30,0.01)); 
+ELSE IF FRUITJU2 = 555 THEN FTJUDA2_=0; 
+ELSE IF FRUITJU2 = 300 THEN FTJUDA2_=0.02; 
+ELSE IF FRUITJU2 IN (.,777,999) THEN FTJUDA2_=.; 
+** ROUND OFF **; 
+FTJUDA2_=round((FTJUDA2_*100),1); 
+Page 34 of 41 June 17, 2022 
+  
+ 
+ 
+    
+     
+        
+   
+    
+ 
+  
+    
+ 
+  
+    
+    
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+     
+         
+   
+    
+ 
+  
+  
+    
+ 
+  
+  
+  
+     
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Calculated Variables in the 2021 BRFSS Data File (continued) 
+Section 15: Fruits & Vegetables 
+FRUTDA2_ Calculated variable for fruit intake in times per day. FRUTDA2_ converts the FRUIT2 variable to a 
+per day response. (Two implied decimal places) 
+0 - 9999 Times per day (two 
+implied decimal places) 
+Respondents reported intake of fruit per day (FRUIT2 not equal to 777,999, or missing) 
+. Don’t know Not Sure or 
+Refused/Missing 
+Respondents who reported they didn´t know the number of times fruit was consumed per day, 
+those who refused to answer, and those with missing responses (FRUIT2=777, 999, or missing) 
+SAS Code: IF 100 < FRUIT2 < 200 THEN FRUTDA2_=FRUIT2- 100; 
+ELSE IF 200 < FRUIT2 < 300 THEN 
+FRUTDA2_=(ROUND((FRUIT2-200)/7,0.01)); 
+ELSE IF 300 < FRUIT2 < 400 THEN 
+FRUTDA2_=(ROUND((FRUIT2-300)/30,0.01)); 
+ELSE IF FRUIT2 = 555 THEN FRUTDA2_=0; 
+ELSE IF FRUIT2 = 300 THEN FRUTDA2_=0.02; 
+ELSE IF FRUIT2 IN (.,777,999) THEN FRUTDA2_=.; 
+** ROUND OFF **; 
+FRUTDA2_=round((FRUTDA2_*100),1); 
+Section 15: Fruits & Vegetables 
+GRENDA1_ Calculated variable for dark green vegetable intake in times per day. GRENDA1_ converts the 
+FVGREEN1 variable to a per day response (Two implied decimal places) 
+0 - 9999 Times per day (two 
+implied decimal places) 
+Respondents reported intake of dark green vegetables per day 
+(FVGREEN1 not equal to 777,999, or missing) 
+. Don’t know/Not Sure or 
+Refused/Missing 
+Respondents who reported they didn´t know the number of times dark green vegetables were 
+consumed per day, those who refused to answer, and those with missing responses 
+(FVGREEN1=777,999, or missing) 
+SAS Code: IF 100 < FVGREEN1 < 200 THEN GRENDA1_=FVGREEN1-100; 
+ELSE IF 200 < FVGREEN1 < 300 THEN 
+GRENDA1_=(ROUND((FVGREEN1-200)/7,0.01)); 
+ELSE IF 300 < FVGREEN1 < 400 THEN 
+GRENDA1_=(ROUND((FVGREEN1-300)/30,0.01)); 
+ELSE IF FVGREEN1 = 555 THEN GRENDA1_=0; 
+ELSE IF FVGREEN1 = 300 THEN GRENDA1_=0.02; 
+ELSE IF FVGREEN1 IN (.,777,999) THEN GRENDA1_=.; 
+** ROUND OFF **; 
+GRENDA1_=round((GRENDA1_*100),1); 
+Page 35 of 41 June 17, 2022 
+  
+ 
+ 
+    
+     
+         
+   
+    
+ 
+   
+  
+    
+ 
+   
+ 
+   
+    
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+     
+      
+ 
+       
+ 
+    
+ 
+  
+  
+ 
+    
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Calculated Variables in the 2021 BRFSS Data File (continued) 
+Section 15: Fruits & Vegetables 
+FRNCHDA_ Calculated variable for French-fry intake in times per day. FRNCHDA_ converts the FRENCHF1 
+variable to a per day response. (Two implied decimal places) 
+0 - 9999 Times per day (two 
+implied decimal places) 
+Respondents reported intake of French fries per day 
+(FRENCHF1 not equal to 777,999, or missing) 
+. Don’t know/Not Sure or 
+Refused/ Missing 
+Respondents who reported they didn´t know the number of time French fries were consumed 
+per day, those who refused to answer, and those with missing responses 
+(FRENCHF1=777, 999, or missing) 
+SAS Code: IF 100 < FRENCHF1 < 200 THEN FRNCHDA_=FRENCHF1-100; 
+ELSE IF 200 < FRENCHF1 < 300 THEN 
+FRNCHDA_=(ROUND((FRENCHF1-200)/7,0.01)); 
+ELSE IF 300 < FRENCHF1 < 400 THEN 
+FRNCHDA_=(ROUND((FRENCHF1-300)/30,0.01)); 
+ELSE IF FRENCHF1 = 555 THEN FRNCHDA_=0; 
+ELSE IF FRENCHF1 = 300 THEN FRNCHDA_=0.02; 
+ELSE IF FRENCHF1 IN (.,777,999) THEN FRNCHDA_=.; 
+** ROUND OFF **; 
+FRNCHDA_=round((FRNCHDA_*100),1); 
+Section 15: Fruits & Vegetables 
+POTADA1_ Calculated variable for potato servings per day. POTADA1_ converts the POTATOE1 variable to a 
+per-day response. 
+0 - 9999 Times per day Respondents reported servings of potatoes per day (POTATOE1 not equal to 777, 999, or 
+missing) 
+. Don’t know/Not Sure or 
+Refused/Missing 
+Respondents who reported they didn´t know the quantity of potato servings consumed per day, 
+those who refused to answer, and those with missing responses (POTATOE1=777, 999, or 
+missing) 
+SAS Code: IF 100 < POTATOE1 < 200 THEN POTADA1_=POTATOE1-100; 
+ELSE IF 200 < POTATOE1 < 300 THEN 
+POTADA1_=(ROUND((POTATOE1-200)/7,0.01)); 
+ELSE IF 300 < POTATOE1 < 400 THEN 
+POTADA1_=(ROUND((POTATOE1-300)/30,0.01)); 
+ELSE IF POTATOE1 = 555 THEN POTADA1_=0; 
+ELSE IF POTATOE1 = 300 THEN POTADA1_=0.02; 
+ELSE IF POTATOE1 IN (.,777,999) THEN POTADA1_=.; 
+** ROUND OFF **; 
+POTADA1_=round((POTADA1_*100),1); 
+Page 36 of 41 June 17, 2022 
+  
+ 
+ 
+    
+     
+       
+   
+    
+ 
+   
+ 
+    
+ 
+  
+  
+  
+    
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+     
+       
+ 
+  
+ 
+ 
+     
+ 
+ 
+    
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Calculated Variables in the 2021 BRFSS Data File (continued) 
+Section 15: Fruits & Vegetables 
+VEGEDA2_ Calculated variable for other vegetable intake in times per day. VEGEDA2_ converts the VEGETAB2 
+variable to a per day response. (Two implied decimal places) 
+0 - 9999 Times per day (two 
+implied decimal places) 
+Respondents reported intake of other vegetables per day (VEGETAB2 not equal to 777, 999, or 
+missing) 
+. Don’t know/Not Sure or 
+Refused/Missing 
+Respondents who reported they didn´t know the number of times other vegetables were 
+consumed per day, those who refused to answer, and those with missing responses 
+(VEGETAB2=777, 999, or missing) 
+SAS Code: IF 100 < VEGETAB2 < 200 THEN VEGEDA2_=VEGETAB2-100; 
+ELSE IF 200 < VEGETAB2 < 300 THEN 
+VEGEDA2_=(ROUND((VEGETAB2-200)/7,0.01)); 
+ELSE IF 300 < VEGETAB2 < 400 THEN 
+VEGEDA2_=(ROUND((VEGETAB2-300)/30,0.01)); 
+ELSE IF VEGETAB2 = 555 THEN VEGEDA2_=0; 
+ELSE IF VEGETAB2 = 300 THEN VEGEDA2_=0.02; 
+ELSE IF VEGETAB2 IN (.,777,999) THEN VEGEDA2_=.; 
+** ROUND OFF **; 
+VEGEDA2_=round((VEGEDA2_*100),1); 
+Section 15: Fruits & Vegetables 
+_MISFRT1 Calculated variable for the number of missing fruit responses. _MISFRT1 is derived from 
+MFTJUDA2_ and MFRUTDA2_ 
+0 No missing fruit 
+responses 
+Respondents with no missing fruit responses 
+1 - 2 Has 1 or 2 missing fruit 
+responses 
+Respondents with missing fruit responses 
+SAS Code: IF FTJUDA2_=. THEN MFTJUDA2_=1; 
+ELSE MFTJUDA2_=0; 
+IF FRUTDA2_=. THEN MFRUTDA2_=1; 
+ELSE MFRUTDA2_=0; 
+_MISFRT1=SUM(MFTJUDA2_, MFRUTDA2_); 
+Page 37 of 41 June 17, 2022 
+  
+ 
+ 
+    
+     
+   
+ 
+   
+ 
+ 
+    
+ 
+ 
+    
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+     
+        
+   
+ 
+    
+   
+ 
+ 
+    
+ 
+ 
+ 
+ 
+ 
+     
+  
+  
+   
+ 
+ 
+   
+ 
+ 
+      
+    
+ 
+ 
+ 
+ 
+ 
+Calculated Variables in the 2021 BRFSS Data File (continued) 
+Section 15: Fruits & Vegetables 
+_MISVEG1    Calculated variable for the number of missing vegetable responses. _MISVEG1 is derived from 
+MGRENDA1_, MFRNCHDA_, MPOTADA1_ and MVEGEDA2_. 
+0 No missing vegetable 
+responses 
+Respondents with no missing vegetable responses 
+1 - 4 Has 1, 2, 3, or 4 missing 
+vegetable responses 
+Respondents with missing vegetable responses 
+SAS Code: IF GRENDA1_=. THEN MGRENDA1_=1; 
+ELSE MGRENDA1_=0; 
+IF FRNCHDA_=. THEN MFRNCHDA_=1; 
+ELSE MFRNCHDA_=0; 
+IF POTADA1_=. THEN MPOTADA1_=1; 
+ELSE MPOTADA1_=0; 
+IF VEGEDA2_=. THEN MVEGEDA2_=1; 
+ELSE MVEGEDA2_=0; 
+_MISVEG1=SUM(MGRENDA1_, MFRNCHDA_, MPOTADA1_, MVEGEDA2_); 
+Section 15: Fruits & Vegetables 
+_FRTRES1 Calculated variable for missing any fruit responses. _FRTRES1 is derived from _MISFRT1 
+0 Not Included–Missing 
+Fruit Responses 
+Respondents with a missing value for one of the fruit variables (1</=_MISFRT1</=2) 
+1 Included–Not Missing 
+Fruit Responses 
+Respondents with no missing fruit variables (_MISFRT1=0) 
+SAS Code: _FRTRES1=0; 
+IF 1<=_MISFRT1<=2 THEN _FRTRES1=0; 
+ELSE IF _MISFRT1=0 THEN _FRTRES1=1; 
+Section 15: Fruits & Vegetables 
+_VEGRES1    Calculated variable for missing any vegetable responses. 
+_VEGRES1 is derived from GRENDA1_, FRNCHDA_ , POTADA1_ , VEGEDA1_ and _MISVEG1. 
+0 Not Included–Missing 
+Vegetable Responses 
+Respondents with missing vegetable per day values (1</=_MISVEG1</=4) 
+1 Included–Not Missing 
+Vegetable Responses 
+Respondents with no missing vegetable per day values (_MISVEG1=0) 
+. Not asked or Missing Respondents with a 99 value for all vegetable per day variables. 
+SAS Code: _VEGRES1=0; 
+IF 1<=_MISVEG1<=4 THEN _VEGRES1=0; 
+ELSE IF _MISVEG1=0 THEN _VEGRES1=1; 
+Page 38 of 41 June 17, 2022 
+  
+ 
+ 
+    
+     
+        
+  
+ 
+ 
+ 
+  
+ 
+ 
+    
+    
+  
+ 
+ 
+ 
+     
+   
+  
+  
+ 
+ 
+  
+ 
+   
+ 
+      
+   
+ 
+  
+ 
+ 
+ 
+     
+        
+ 
+   
+  
+    
+  
+ 
+   
+   
+ 
+    
+    
+ 
+ 
+ 
+ 
+ 
+Calculated Variables in the 2021 BRFSS Data File (continued) 
+Section 15: Fruits & Vegetables 
+_FRUTSU1 Calculated variable for total fruits consumed per day. _FRUTSU1 is derived from the individual fruit 
+variables (FTJUDA2_, FRUTDA2_). Values for don´t know, refused, or missing” (99) are excluded 
+from the sum. 
+0 -
+99998 
+Number of Fruits 
+consumed per day (two 
+implied decimal places) 
+Number of Fruits consumed per day (two implied decimal places) (FTJUDA2_+FRUTDA2_) 
+. Not asked or Missing Respondents with a 99 value for all four fruits per day variables. 
+SAS Code: _FRUTSU1=(FTJUDA2_/100) + (FRUTDA2_/100); 
+_FRUTSU1=round((_FRUTSU1*100),1); 
+Section 15: Fruits & Vegetables 
+_VEGESU1    Calculated variable for total vegetables consumed per day. _VEGESU1 is derived from the individual 
+vegetable variables (GRENDA1_, FRNCHDA_, POTADA1_, and VEGEDA2_). 
+Values for don´t know, refused, or missing” (99) are excluded from the sum. 
+0 -
+99998 
+Number of Vegetables 
+consumed per day (two 
+implied decimal places) 
+Sum of all vegetable per day values (two implied decimal places) 
+(GRENDA1_+FRNCHDA_+POTADA1_+VEGEDA2_) 
+. Not asked or Missing Respondents with a 99 value for all vegetable per day variables. 
+SAS Code: _VEGESU1=(GRENDA1_/100) + (FRNCHDA_/100) + (POTADA1_/100) + 
+(VEGEDA2_/100); 
+_VEGESU1=round((_VEGESU1*100),1); 
+Section 15: Fruits & Vegetables 
+_FRTLT1A Calculated variable for consume fruit 1 or more times per day. _FRTLT1A is derived from 
+_FRUTSU1 
+1 Consumed fruit one or 
+more times per day 
+Respondents who reported consuming Fruit 1 or more times a day (_FRUTSU1/100 >=1) 
+2 Consumed fruit less than 
+one time per day 
+Respondents who reported consuming Fruit less than 1 time a day (_FRUTSU1/100 < 1) 
+9 Don´t know, refused or 
+missing values 
+Respondents with don´t know, not sure, refused, or missing responses (_FRUTSU1=.) 
+SAS Code: IF 0 <= (_FRUTSU1/100) < 1 THEN _FRTLT1A=2; 
+ELSE IF (_FRUTSU1/100) >= 1 THEN _FRTLT1A=1; 
+ELSE _FRTLT1A=9; 
+Page 39 of 41 June 17, 2022 
+  
+ 
+ 
+    
+     
+     
+   
+    
+ 
+  
+    
+  
+ 
+   
+ 
+   
+    
+ 
+ 
+ 
+ 
+ 
+     
+        
+   
+ 
+  
+   
+ 
+ 
+     
+    
+ 
+ 
+ 
+ 
+     
+       
+   
+   
+ 
+  
+   
+ 
+  
+      
+    
+ 
+ 
+ 
+ 
+Calculated Variables in the 2021 BRFSS Data File (continued) 
+Section 15: Fruits & Vegetables 
+_VEGLT1A Calculated variable for consume vegetables 1 or more times per day. 
+_VEGLT1A is derived from _VEGESU1 
+1 Consumed vegetables one 
+or more times per day 
+Respondents that reported consuming vegetables 1 or more times a day (_VEGESU1/100 >=1) 
+2 Consumed vegetables less 
+than one time per day 
+Respondents that reported consuming vegetables less than 1 time a day (_VEGESU1/100 < 1) 
+9 Don´t know, refused or 
+missing values 
+Respondents with don´t know, not sure, refused or missing responses (_VEGESU1=.) 
+SAS Code: IF 0 <= (_VEGESU1/100) < 1 THEN _VEGLT1A=2; 
+ELSE IF (_VEGESU1/100) >= 1 THEN _VEGLT1A=1; 
+ELSE _VEGLT1A=9; 
+Section 15: Fruits & Vegetables 
+_FRT16A Calculated variable for reported consuming fruit >16 per day. _FRT16A is derived from _FRUTSU1 
+0 Not Included - Values are 
+too high 
+Respondents with an out-of-range value for sum of fruits per day (_FRUTSU1>16) 
+1 Included–Values are in 
+accepted range 
+Respondents with value for sum of fruits per day in acceptable range (_FRUTSU1</=16) 
+. Not asked or Missing Respondents with a 99 value for both fruit per day variables. 
+SAS Code: IF (_FRUTSU1/100)>16 THEN _FRT16A=0; 
+ELSE IF (_FRUTSU1/100)<=16 THEN _FRT16A=1; 
+Section 15: Fruits & Vegetables 
+_VEG23A Calculated variable for reported consuming vegetables >23 per day. 
+_VEG23A is derived from _VEGESU1 
+0 Not Included–Values are 
+too high 
+Respondents with an out-of-range value for sum of vegetables per day (_VEGESU1>23) 
+1 Included–Values are in 
+accepted range 
+Respondents with value for sum of vegetables per day in acceptable range (_VEGESU1< /=23) 
+. Not asked or Missing Respondents with a 99 value for all vegetable per day variables. 
+SAS Code: IF (_VEGESU1/100)>23 THEN _VEG23A=0; 
+ELSE IF (_VEGESU1/100)<=23 THEN _VEG23A=1; 
+Page 40 of 41 June 17, 2022 
+  
+ 
+ 
+   
+     
+      
+ 
+   
+ 
+  
+ 
+      
+      
+ 
+     
+    
+ 
+ 
+ 
+ 
+ 
+     
+     
+   
+  
+ 
+ 
+ 
+  
+ 
+ 
+    
+ 
+ 
+      
+    
+ 
+ 
+ 
+ 
+Calculated Variables in the 2021 BRFSS Data File (continued) 
+Section 15: Fruits & Vegetables 
+_FRUITE1 Calculated variable for fruit exclusion from analyses. _FRUITE1 is derived from _FRTRES1 and 
+_FRT16A 
+0 No missing values and in 
+accepted range 
+Respondents with no missing fruit values and in accepted range 
+(_FRTRES1=1 AND _FRT16A=1) 
+1 Missing Fruit responses Respondents missing at least one fruit per day value (_FRTRES1=0) 
+2 Fruit values out of range Respondents with an out-of-range value for sum of fruits per day 
+(_FRTRES1=1 AND _FRT16A=0) 
+. Not asked or Missing Respondents with a 99 value for both fruit per day variables. 
+SAS Code: IF _FRTRES1=1 AND _FRT16A=0 THEN _FRUITE1=2; 
+ELSE IF _FRTRES1=1 AND _FRT16A=1 THEN _FRUITE1=0; 
+ELSE _FRUITE1=1; 
+Section 15: Fruits & Vegetables 
+_VEGETE1 Calculated variable for vegetable exclusion from analyses. 
+_VEGETE1 is derived from _VEGRES1 and _VEG23A. 
+0 No missing values and in 
+accepted range 
+Respondents with no missing vegetable per day values and in all accepted range 
+(_VEGRES1=1 AND _VEG23A=1) 
+1 Missing Vegetable 
+responses 
+Respondents with missing vegetable per day values (_VEGRES1=0) 
+2 Vegetable values out of 
+range 
+Respondents with out-of-range vegetable-per day-values (_VEGRES1=1 AND _VEG23A=0) 
+. Not asked or Missing Respondents with a 99 value for all vegetable per day variables. 
+SAS Code: IF _VEGRES1=1 AND _VEG23A=0 THEN _VEGETE1=2; 
+ELSE IF _VEGRES1=1 AND _VEG23A=1 THEN _VEGETE1=0; 
+ELSE _VEGETE1=1; 
+June 17, 2022 

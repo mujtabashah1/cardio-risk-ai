@@ -1,0 +1,12 @@
+{
+  "seed": 42,
+  "threads": 4,
+  "model_fit_rows": 242904,
+  "calibration_only_rows": 60937,
+  "fit_positive": 19776,
+  "calibration_positive": 4950,
+  "training_only_scale_pos_weight": 11.282766990291263,
+  "calibration_source": "Reserved random, class-stratified labeled-record groups within original train.csv; not validation or test",
+  "tuning": "Top two distinct model families: CatBoost 18 configurations and XGBoost 20 configurations with 3-fold StratifiedGroupKFold; logistic comparator 5 C values with 5 grouped folds. Uses 60000 stratified model-fit rows, independently fitted preprocessing within each fold, and full model-fit partition refits.",
+  "test_locked": true
+}

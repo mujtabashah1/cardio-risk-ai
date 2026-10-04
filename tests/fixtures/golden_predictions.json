@@ -1,0 +1,82 @@
+[
+  {
+    "name": "synthetic_complete",
+    "input": {
+      "age_group": 8,
+      "sex": 1,
+      "bmi": 28.5,
+      "general_health": 3,
+      "physical_activity": 1,
+      "smoking_status": 3,
+      "diabetes": 3,
+      "stroke_history": 0,
+      "kidney_disease": 0,
+      "asthma": 0,
+      "difficulty_walking": 0,
+      "high_cholesterol": 1,
+      "high_blood_pressure": 1,
+      "alcohol_use": 0
+    },
+    "expected_profile_score": 0.18322252532268066,
+    "expected_classification": "lower_model_association",
+    "model_version": "1.0.0",
+    "absolute_tolerance": 1e-12
+  },
+  {
+    "name": "synthetic_elevated",
+    "input": {
+      "age_group": 12,
+      "sex": 1,
+      "bmi": 28.5,
+      "general_health": 5,
+      "physical_activity": 1,
+      "smoking_status": 3,
+      "diabetes": 1,
+      "stroke_history": 1,
+      "kidney_disease": 0,
+      "asthma": 0,
+      "difficulty_walking": 1,
+      "high_cholesterol": 1,
+      "high_blood_pressure": 1,
+      "alcohol_use": 0
+    },
+    "expected_profile_score": 0.7185490906095023,
+    "expected_classification": "elevated_model_association",
+    "model_version": "1.0.0",
+    "absolute_tolerance": 1e-12
+  },
+  {
+    "name": "synthetic_partial",
+    "input": {
+      "sex": 2,
+      "bmi": null
+    },
+    "expected_profile_score": 0.28793427194465354,
+    "expected_classification": "elevated_model_association",
+    "model_version": "1.0.0",
+    "absolute_tolerance": 1e-12
+  },
+  {
+    "name": "synthetic_missing",
+    "input": {
+      "age_group": null,
+      "sex": null,
+      "bmi": null,
+      "general_health": null,
+      "physical_activity": null,
+      "smoking_status": null,
+      "diabetes": null,
+      "stroke_history": null,
+      "kidney_disease": null,
+      "asthma": null,
+      "difficulty_walking": null,
+      "high_cholesterol": null,
+      "high_blood_pressure": null,
+      "alcohol_use": null
+    },
+    "expected_profile_score": 0.22160884777301737,
+    "expected_classification": "elevated_model_association",
+    "model_version": "1.0.0",
+    "absolute_tolerance": 1e-12
+  }
+]

@@ -1,0 +1,93 @@
+{
+  "measurement": "Warm localhost HTTP end-to-end, including strict validation/serialization; synthetic profiles; single caller; excludes cold start; not server capacity",
+  "model_version": "1.0.0",
+  "pipeline_sha256": "4e313ef2810df2d4eb73c496db169cd963303da56abb9f1fa2e97522c21108f1",
+  "application_startup_seconds": 1.7918539000093006,
+  "first_prediction_seconds": 0.016691299999365583,
+  "benchmarks": [
+    {
+      "records": 1,
+      "iterations": 20,
+      "mean_latency_seconds": 0.011801410003681668,
+      "median_latency_seconds": 0.011533600016264245,
+      "p95_latency_seconds": 0.012562880013138059,
+      "records_per_second": 86.70319749166245
+    },
+    {
+      "records": 10,
+      "iterations": 20,
+      "mean_latency_seconds": 0.013533360001747496,
+      "median_latency_seconds": 0.013169049983844161,
+      "p95_latency_seconds": 0.015394465002464131,
+      "records_per_second": 759.3562187301314
+    },
+    {
+      "records": 100,
+      "iterations": 20,
+      "mean_latency_seconds": 0.01573787500237813,
+      "median_latency_seconds": 0.015688350002164952,
+      "p95_latency_seconds": 0.016308315003698226,
+      "records_per_second": 6374.1566185226775
+    },
+    {
+      "records": 1000,
+      "iterations": 20,
+      "mean_latency_seconds": 0.06483946000080323,
+      "median_latency_seconds": 0.06286594999255612,
+      "p95_latency_seconds": 0.08895368998928463,
+      "records_per_second": 15906.862142676739
+    }
+  ],
+  "concurrency": [
+    {
+      "concurrent_clients": 5,
+      "requests": 10,
+      "successful": 10,
+      "errors": 0,
+      "success_rate": 1.0,
+      "elapsed_seconds": 0.925634400016861,
+      "mean_latency_seconds": 0.04805454999732319,
+      "median_latency_seconds": 0.05522684998868499,
+      "p95_latency_seconds": 0.06232399999425979
+    },
+    {
+      "concurrent_clients": 10,
+      "requests": 20,
+      "successful": 20,
+      "errors": 0,
+      "success_rate": 1.0,
+      "elapsed_seconds": 1.3233598000078928,
+      "mean_latency_seconds": 0.07544593499769689,
+      "median_latency_seconds": 0.0662270499888109,
+      "p95_latency_seconds": 0.15168766500137282
+    }
+  ],
+  "memory_working_set": [
+    {
+      "stage": "ready_idle",
+      "working_set_MiB": 189.76953125
+    },
+    {
+      "stage": "single_prediction",
+      "working_set_MiB": 190.89453125
+    },
+    {
+      "stage": "100_record_batch",
+      "working_set_MiB": 192.01171875
+    },
+    {
+      "stage": "5_concurrent_clients",
+      "working_set_MiB": 199.265625
+    },
+    {
+      "stage": "10_concurrent_clients",
+      "working_set_MiB": 199.76171875
+    },
+    {
+      "stage": "post_repeated_requests",
+      "working_set_MiB": 199.76171875
+    }
+  ],
+  "memory_note": "Approximate native-process working-set samples, not container memory. Short observations cannot prove leak absence.",
+  "model_deserializations": 1
+}

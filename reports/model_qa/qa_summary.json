@@ -1,0 +1,17 @@
+{
+  "synthetic_tests": 55,
+  "score_min": 0.00211,
+  "score_max": 0.831258,
+  "low_score": 0.002504,
+  "high_score": 0.831258,
+  "high_scored_higher": true,
+  "unexpected_errors": 0,
+  "missing_passed": 4,
+  "boundary_passed": 56,
+  "boundary_count": 56,
+  "threshold_score_unchanged": true,
+  "classification_distribution": {
+    "lower_model_association": 53,
+    "elevated_model_association": 2
+  }
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "group": "api",
+    "count": 25,
+    "passed": true
+  },
+  {
+    "group": "inference",
+    "count": 12,
+    "passed": true
+  },
+  {
+    "group": "models",
+    "count": 9,
+    "passed": true
+  },
+  {
+    "group": "artifacts",
+    "count": 10,
+    "passed": true
+  },
+  {
+    "group": "frontend",
+    "count": 9,
+    "passed": true
+  },
+  {
+    "group": ".",
+    "count": 4,
+    "passed": true
+  }
+]

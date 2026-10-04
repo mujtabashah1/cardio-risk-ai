@@ -1,0 +1,261 @@
+{
+  "version": "1.0.0",
+  "input_format": "Nonempty dictionary or list of nonempty dictionaries using clean feature names; optional omitted fields become missing.",
+  "features": [
+    {
+      "name": "age_group",
+      "feature_type": "categorical",
+      "required": false,
+      "missing_allowed": true,
+      "allowed_categories": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "numeric_constraints": {
+        "integer_only": true
+      },
+      "description": "What is your age? Adults 18 or older only.",
+      "source_variable": "_AGEG5YR",
+      "ordinal_or_nominal": "ordinal",
+      "unsupported_category_handling": "Numeric unseen categorical codes become missing with a warning; not silently treated as valid CDC categories."
+    },
+    {
+      "name": "sex",
+      "feature_type": "categorical",
+      "required": false,
+      "missing_allowed": true,
+      "allowed_categories": [
+        1,
+        2
+      ],
+      "numeric_constraints": {
+        "integer_only": true
+      },
+      "description": "What sex was recorded for you under the BRFSS respondent-sex question?",
+      "source_variable": "SEXVAR",
+      "ordinal_or_nominal": "nominal",
+      "unsupported_category_handling": "Numeric unseen categorical codes become missing with a warning; not silently treated as valid CDC categories."
+    },
+    {
+      "name": "bmi",
+      "feature_type": "continuous numeric",
+      "required": false,
+      "missing_allowed": true,
+      "allowed_categories": null,
+      "numeric_constraints": {
+        "minimum": 12,
+        "maximum": 99.99,
+        "units": "kg/m^2; human-readable, not multiplied by 100"
+      },
+      "description": "Enter your measured height and weight to calculate BMI.",
+      "source_variable": "_BMI5",
+      "ordinal_or_nominal": "continuous",
+      "unsupported_category_handling": "Numeric unseen categorical codes become missing with a warning; not silently treated as valid CDC categories."
+    },
+    {
+      "name": "general_health",
+      "feature_type": "categorical",
+      "required": false,
+      "missing_allowed": true,
+      "allowed_categories": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "numeric_constraints": {
+        "integer_only": true
+      },
+      "description": "In general, would you say your health is:",
+      "source_variable": "GENHLTH",
+      "ordinal_or_nominal": "ordinal",
+      "unsupported_category_handling": "Numeric unseen categorical codes become missing with a warning; not silently treated as valid CDC categories."
+    },
+    {
+      "name": "physical_activity",
+      "feature_type": "categorical",
+      "required": false,
+      "missing_allowed": true,
+      "allowed_categories": [
+        0,
+        1
+      ],
+      "numeric_constraints": {
+        "integer_only": true
+      },
+      "description": "During the past 30 days, did you do physical activity or exercise other than your regular job?",
+      "source_variable": "_TOTINDA",
+      "ordinal_or_nominal": "nominal",
+      "unsupported_category_handling": "Numeric unseen categorical codes become missing with a warning; not silently treated as valid CDC categories."
+    },
+    {
+      "name": "smoking_status",
+      "feature_type": "categorical",
+      "required": false,
+      "missing_allowed": true,
+      "allowed_categories": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "numeric_constraints": {
+        "integer_only": true
+      },
+      "description": "Have you smoked at least 100 cigarettes in your entire life? If yes, do you now smoke every day, some days, or not at all?",
+      "source_variable": "_SMOKER3",
+      "ordinal_or_nominal": "nominal",
+      "unsupported_category_handling": "Numeric unseen categorical codes become missing with a warning; not silently treated as valid CDC categories."
+    },
+    {
+      "name": "diabetes",
+      "feature_type": "categorical",
+      "required": false,
+      "missing_allowed": true,
+      "allowed_categories": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "numeric_constraints": {
+        "integer_only": true
+      },
+      "description": "Have you ever been told you had diabetes? If yes, was it only during pregnancy? Include a separate prediabetes/borderline option.",
+      "source_variable": "DIABETE4",
+      "ordinal_or_nominal": "nominal",
+      "unsupported_category_handling": "Numeric unseen categorical codes become missing with a warning; not silently treated as valid CDC categories."
+    },
+    {
+      "name": "stroke_history",
+      "feature_type": "categorical",
+      "required": false,
+      "missing_allowed": true,
+      "allowed_categories": [
+        0,
+        1
+      ],
+      "numeric_constraints": {
+        "integer_only": true
+      },
+      "description": "Have you ever been told you had a stroke?",
+      "source_variable": "CVDSTRK3",
+      "ordinal_or_nominal": "nominal",
+      "unsupported_category_handling": "Numeric unseen categorical codes become missing with a warning; not silently treated as valid CDC categories."
+    },
+    {
+      "name": "kidney_disease",
+      "feature_type": "categorical",
+      "required": false,
+      "missing_allowed": true,
+      "allowed_categories": [
+        0,
+        1
+      ],
+      "numeric_constraints": {
+        "integer_only": true
+      },
+      "description": "Not including kidney stones, bladder infection or incontinence, were you ever told you had kidney disease?",
+      "source_variable": "CHCKDNY2",
+      "ordinal_or_nominal": "nominal",
+      "unsupported_category_handling": "Numeric unseen categorical codes become missing with a warning; not silently treated as valid CDC categories."
+    },
+    {
+      "name": "asthma",
+      "feature_type": "categorical",
+      "required": false,
+      "missing_allowed": true,
+      "allowed_categories": [
+        0,
+        1
+      ],
+      "numeric_constraints": {
+        "integer_only": true
+      },
+      "description": "Have you ever been told you had asthma?",
+      "source_variable": "ASTHMA3",
+      "ordinal_or_nominal": "nominal",
+      "unsupported_category_handling": "Numeric unseen categorical codes become missing with a warning; not silently treated as valid CDC categories."
+    },
+    {
+      "name": "difficulty_walking",
+      "feature_type": "categorical",
+      "required": false,
+      "missing_allowed": true,
+      "allowed_categories": [
+        0,
+        1
+      ],
+      "numeric_constraints": {
+        "integer_only": true
+      },
+      "description": "Do you have serious difficulty walking or climbing stairs?",
+      "source_variable": "DIFFWALK",
+      "ordinal_or_nominal": "nominal",
+      "unsupported_category_handling": "Numeric unseen categorical codes become missing with a warning; not silently treated as valid CDC categories."
+    },
+    {
+      "name": "high_cholesterol",
+      "feature_type": "categorical",
+      "required": false,
+      "missing_allowed": true,
+      "allowed_categories": [
+        0,
+        1
+      ],
+      "numeric_constraints": {
+        "integer_only": true
+      },
+      "description": "Have you ever been told by a doctor, nurse, or other health professional that your cholesterol is high?",
+      "source_variable": "TOLDHI3",
+      "ordinal_or_nominal": "nominal",
+      "unsupported_category_handling": "Numeric unseen categorical codes become missing with a warning; not silently treated as valid CDC categories."
+    },
+    {
+      "name": "high_blood_pressure",
+      "feature_type": "categorical",
+      "required": false,
+      "missing_allowed": true,
+      "allowed_categories": [
+        0,
+        1
+      ],
+      "numeric_constraints": {
+        "integer_only": true
+      },
+      "description": "Have you been told by a health professional that you have high blood pressure? Separate pregnancy-only and borderline answers map to 0.",
+      "source_variable": "_RFHYPE6",
+      "ordinal_or_nominal": "nominal",
+      "unsupported_category_handling": "Numeric unseen categorical codes become missing with a warning; not silently treated as valid CDC categories."
+    },
+    {
+      "name": "alcohol_use",
+      "feature_type": "categorical",
+      "required": false,
+      "missing_allowed": true,
+      "allowed_categories": [
+        0,
+        1
+      ],
+      "numeric_constraints": {
+        "integer_only": true
+      },
+      "description": "During the past 30 days, did you have at least one drink of any alcoholic beverage?",
+      "source_variable": "DRNKANY5",
+      "ordinal_or_nominal": "nominal",
+      "unsupported_category_handling": "Numeric unseen categorical codes become missing with a warning; not silently treated as valid CDC categories."
+    }
+  ]
+}

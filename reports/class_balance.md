@@ -1,0 +1,14 @@
+# Class imbalance after splitting
+
+| dataset | target | count | percentage | dataset_rows |
+| --- | --- | --- | --- | --- |
+| full_cleaned | 0 | 398735 | 91.862147 | 434058 |
+| full_cleaned | 1 | 35323 | 8.137853 | 434058 |
+| train | 0 | 279115 | 91.862191 | 303841 |
+| train | 1 | 24726 | 8.137809 | 303841 |
+| validation | 0 | 59810 | 91.86134 | 65109 |
+| validation | 1 | 5299 | 8.13866 | 65109 |
+| test | 0 | 59810 | 91.862751 | 65108 |
+| test | 1 | 5298 | 8.137249 | 65108 |
+
+No balancing/resampling performed. Majority-to-minority ratios are descriptive; these are unweighted survey counts, not population prevalence estimates. Test labels were used only for requested split-integrity and class-count validation; no model selection or preprocessing has used the test set.
