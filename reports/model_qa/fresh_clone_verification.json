@@ -1,0 +1,19 @@
+{
+  "date": "2026-10-04",
+  "timezone": "America/Los_Angeles",
+  "scope": "Fresh local Git clone with explicit clone import root; not a GitHub push verification",
+  "python_tests_passed": 68,
+  "python_tests_failed": 0,
+  "python_tests_skipped": 1,
+  "skipped_test": "Optional cached validation audit: excluded respondent data and prediction cache",
+  "api_tests": 25,
+  "inference_tests": 12,
+  "model_tests": 9,
+  "artifact_tests": {"passed": 9, "skipped": 1},
+  "frontend_contract_tests": 9,
+  "pipeline_tests": 4,
+  "model_hash_match": true,
+  "supporting_integrity_and_golden_tests_passed": true,
+  "only_data_csv": "data/processed/data_dictionary.csv",
+  "respondent_datasets_present": false
+}

@@ -14,3 +14,4 @@
 - Ran 55 synthetic model cases, 4 missing-input cases and 56 boundary checks. No fitting or respondent-data predictions were performed.
 - Verified Chrome submissions for both synthetic presets: 0.002504 and 0.831258. Raw JSON, threshold switching, missing BMI, error rendering, local recording/CSV download and responsive layout were checked.
 - Prepared training reproduction documentation, privacy exclusions and version-control review. GitHub status is recorded separately in docs/version_control.md; no final release tag is created for this development milestone.
+- Committed the verified local milestone on main. A fresh local clone passed 68 Python tests with one explicitly skipped local-data audit; model/supporting hashes and golden/API checks passed without respondent datasets. The original workspace passed all 69 Python tests, including that audit.

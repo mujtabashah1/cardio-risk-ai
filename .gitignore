@@ -70,6 +70,7 @@ catboost_info/
 !/reports/model_qa/frontend_tests.json
 !/reports/model_qa/all_test_results.json
 !/reports/model_qa/git_privacy_review.json
+!/reports/model_qa/fresh_clone_verification.json
 !/reports/model_qa/synthetic_profile_results.csv
 !/reports/model_qa/feature_sensitivity_tests.csv
 !/reports/model_qa/missing_input_tests.csv
